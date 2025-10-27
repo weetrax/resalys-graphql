@@ -46464,10 +46464,7 @@ export declare function getSdk<C>(requester: Requester<C>): {
     requestBrochure(variables: RequestBrochureQueryVariables, options?: C): Promise<RequestBrochureQuery>;
 };
 export type Sdk = ReturnType<typeof getSdk>;
-import { getSdkRequester } from 'playwright-graphql';
-export type APIRequestContext = Parameters<typeof getSdkRequester>[0];
-export type RequesterOptions = Parameters<typeof getSdkRequester>[1] | string;
-export type RequestHandler = Parameters<typeof getSdkRequester>[2];
+
 export declare const getClient: (apiContext: APIRequestContext, options?: RequesterOptions, requestHandler?: RequestHandler) => {
     addBaby(variables: Exact<{
         session: Session;
@@ -51100,4 +51097,4 @@ export declare const getClient: (apiContext: APIRequestContext, options?: Reques
         timeout?: number;
     }, "data">): Promise<RequestBrochureQuery>;
 };
-export type GqlAPI = ReturnType<typeof getClient>;
+

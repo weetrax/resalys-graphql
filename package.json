@@ -1,6 +1,6 @@
 {
   "name": "resalys-graphql",
-  "version": "106.250.0",
+  "version": "106.250.1",
   "description": "RSL GraphQL",
   "main": "dist/graphql.js",
   "types": "dist/graphql.d.ts",
@@ -13,7 +13,8 @@
     "download-schema": "curl -o ./schema.graphql.bin http://playwright.nonreg.rsl.dev.sequoiasoft.com/rsl/schema_graphql?base_id=quality_graphql_v10_6_a_resalys && mv ./schema.graphql.bin ./src/schema.graphql",
     "generate": "playwright-graphql --schema ./src/schema.graphql",
     "tentative": "playwright-graphql --schema ./src/schema.graphql",
-    "build": "playwright-graphql --schema ./src/schema.graphql && tsc gql/graphql.ts --declaration --outDir dist"
+    "build": "playwright-graphql --schema ./src/schema.graphql && tsc gql/graphql.ts --declaration --outDir dist && npm run clean-playwright-refs",
+    "clean-playwright-refs": "node scripts/clean-build.js"
   },
   "peerDependencies": {
     "graphql": "^16.0.0"
