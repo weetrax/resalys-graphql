@@ -1,0 +1,18 @@
+query getCustomerGiftCodes($session: Session!){
+    getCustomerGiftCodes(session: $session){
+        giftCodes{
+            valid
+            used
+            type
+            code
+            amount{
+                amount
+                currencyCode
+            }
+            validityDate
+            useDate
+            bookingId
+            label
+        }
+    }
+}

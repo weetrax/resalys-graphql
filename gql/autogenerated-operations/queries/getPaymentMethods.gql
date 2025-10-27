@@ -1,0 +1,16 @@
+query getPaymentMethods($session: Session!){
+    getPaymentMethods(session: $session){
+        paymentMethod{
+            automaticPaymentCode
+            virtualPaymentCode
+            paymentMethodOption{
+                code
+                label
+            }
+            automaticPaymentMethodOption{
+                code
+                label
+            }
+        }
+    }
+}

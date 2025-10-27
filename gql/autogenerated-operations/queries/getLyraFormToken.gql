@@ -1,0 +1,17 @@
+query getLyraFormToken($session: Session!, $input: LyraFormTokenInput!){
+    getLyraFormToken(session: $session, input: $input){
+        gatewayDescription{
+            endPoint
+            publicKey
+            isTest
+            url{
+                acceptUrl
+                declineUrl
+                cancelUrl
+                exceptionUrl
+            }
+        }
+        orderId
+        formToken
+    }
+}

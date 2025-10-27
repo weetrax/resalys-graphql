@@ -1,0 +1,8 @@
+query getCountries($session: Session!){
+    getCountries(session: $session){
+        countryList{
+            code
+            label
+        }
+    }
+}

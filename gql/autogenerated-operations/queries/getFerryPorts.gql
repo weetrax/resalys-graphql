@@ -1,0 +1,8 @@
+query getFerryPorts($session: Session!){
+    getFerryPorts(session: $session){
+        ports{
+            portName
+            label
+        }
+    }
+}

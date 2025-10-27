@@ -1,0 +1,3164 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+"""
+test query
+"""
+type Query {
+  """
+  getSession
+  Il devra etre votre premier appel.<br/>
+
+  Il utilisera comme paramètres les informations d'utilisateurs configurés dans Resalys.
+  Vous obtiendrez une session en réponse.\n
+  Cette session sera votre clé d'entrée pour toutes les autres requêtes.
+  Elle est également la clé mémoire qui stocke coté serveur toutes les actions que vous effectuez.
+  Pour la suite des tests, je vous invite à copier
+  le résultat de votre session dans l'objet session des "QUERY VARIABLES"
+  en lieux et place de "@session".
+  """
+  getSession(input: SessionInput): SessionOutput
+  # LANG_gql_checkApiAlive
+  checkApiAlive: ApiAliveOutput
+  checkValidLogin(session: Session!, input: ValidLoginInput!): ValidLoginOutput
+
+  # aMode de fonctionnement de la r�servation en ligne
+  # 0 : Individuel, Grand public
+  # 1 : Ayant droit de type CGOS/CNAS
+  # 2 : Partenaire
+  # 3 & 6 :  ayant droit avec code ayant droit du partenaire
+  # 4 : Propri�taire r�sidence
+  # 5 : Ayant droit transparent
+  # 7 : Propri�taire mobilhome
+  # 8 : Partenaire achat de lin�aire
+  getSalesChannelMode(session: Session!): SalesChannelModeOutput
+  # LANG_gql_getRSLVersion
+  getResalysVersion(session: Session!): ResalysVersionOutput
+  # LANG_gql_getLanguageVars
+  getTranslations(
+    session: Session!
+    input: TranslationsInput
+  ): TranslationsOutput
+  # LANG_gql_getAllLanguageVars
+  getNeobookingTranslations(
+    session: Session!
+    input: NeobookingTranslationsInput
+  ): NeobookingTranslationsOutput
+  # LANG_gql_showCart
+  getCart(session: Session!): CartOutput
+  # LANG_gql_showPartner
+  getPartner(session: Session!): PartnerOutput
+  # LANG_gql_checkSessionID
+  checkSessionActivated(session: Session!): SessionActivatedOutput
+  # LANG_gql_isModuleFacebookActivated
+  checkModuleFacebookActivated(session: Session!): ModuleFacebookActivatedOutput
+  # LANG_gql_getProposals
+  getProposals(session: Session!, input: ProposalsInput): ProposalsOutput
+  # LANG_gql_getEtabProposals
+  getProposalsByProperties(
+    session: Session!
+    input: ProposalsByPropertiesInput
+  ): ProposalsByPropertiesOutput
+  # LANG_gql_getProposalsByKeys
+  getProposalsByKeys(
+    session: Session!
+    input: ProposalsByKeysInput!
+  ): ProposalsByKeysOutput
+  # LANG_gql_getProposalByRoomTypes
+  getProposalByRoomTypes(
+    session: Session!
+    input: ProposalByRoomTypesInput!
+  ): ProposalByRoomTypesOutput
+  # LANG_gql_getStayTypes
+  getProperties(
+    authentication: AuthenticationInput!
+    input: PropertiesInput
+  ): PropertiesOutput
+  # LANG_gql_getRoomTypeCategories
+  getRoomTypeCategories(
+    session: Session!
+    input: RoomTypeCategoriesInput!
+  ): RoomTypeCategoriesOutput
+  # LANG_gql_getRoomTypes
+  getRoomTypes(session: Session!, input: RoomTypesInput): RoomTypesOutput
+  # LANG_gql_getAvailableRoomFeatures
+  getAvailableRoomFeatures(
+    session: Session!
+    input: AvailableRoomFeaturesInput
+  ): AvailableRoomFeaturesOutput
+  # LANG_gql_getProductCategories
+  getProductCategories(session: Session!): ProductCategoriesOutput
+  # LANG_gql_getGlobalProducts
+  getBookingProducts(
+    session: Session!
+    input: BookingProductsInput
+  ): BookingProductsOutput
+  # LANG_gql_getProductsForOccupant
+  getOccupantProducts(
+    session: Session!
+    input: OccupantProductsInput
+  ): OccupantProductsOutput
+  # LANG_gql_getAllOccupantProductsAllAgeRanges
+  getAllOccupantProductsAllAgeRanges(
+    session: Session!
+    input: AllOccupantProductsAllAgeRangesInput!
+  ): AllOccupantProductsAllAgeRangesOutput
+  # LANG_gql_getRoomProducts
+  getAccommodationProducts(
+    session: Session!
+    input: AccommodationProductsInput!
+  ): AccommodationProductsOutput
+  # LANG_gql_hasProductsForOccupant
+  hasProductsForOccupant(
+    session: Session!
+    input: HasProductsForOccupantInput
+  ): ProductsForOccupantOutput
+  #LANG_gql_getMapSelectorData
+  getMapSelectorData(
+    session: Session!
+    input: MapSelectorDataInput
+  ): MapSelectorDataOutput
+  # LANG_gql_getPaymentDueTypes
+  getPaymentPlans(
+    session: Session!
+    input: PaymentPlansInput
+  ): PaymentPlansOutput
+  # LANG_gql_getPaymentMethods
+  getPaymentMethods(session: Session!): PaymentMethodsOutput
+
+  getBookingPaymentPlans(
+    session: Session!
+    input: PaymentPlansInput
+  ): PaymentPlansOutput
+
+  """
+   LANG_gql_getPrivilegeCards
+
+  ---
+
+  ## LANG_gql_client
+  ### LANG_gql_infos
+  """
+  getPrivilegeCardTypes(session: Session!): PrivilegeCardTypesOutput
+  # LANG_gql_getCountries
+  getCountries(session: Session!): CountriesOutput
+  # LANG_gql_getCivilities
+  getCivilities(session: Session!): CivilitiesOutput
+  # LANG_gql_getLanguages
+  getLanguages(session: Session!): LanguagesOutput
+  # LANG_gql_getCriterias
+  getCustomerCriterias(
+    session: Session!
+    input: CustomerCriteriasInput
+  ): CustomerCriteriasOutput
+  # LANG_gql_getReservationCriterias
+  getBookingRecordCriterias(session: Session!): BookingRecordCriteriasOutput
+  # LANG_gql_getCustomer
+  getCurrentCustomerAccount(session: Session!): CurrentCustomerAccountOutput
+  # LANG_gql_getCustomerAccount
+  getCustomerDepositAccounts(session: Session!): CustomerDepositAccountsOutput
+  # LANG_gql_getBooklets
+  getBrochures(session: Session!): BrochuresOutput
+  # LANG_gql_getCampaigns
+  getCampaigns(session: Session!): CampaignsOutput
+  # LANG_gql_LANG_gql_postCodeApiSearchSimpleAddress
+  getPostCodeApiSimple(
+    session: Session!
+    input: PostCodeApiSimpleInput!
+  ): PostCodeApiSimpleOutput
+  # LANG_gql_LANG_gql_postCodeApiSearchDetailAddress
+  getPostCodeApiDetail(
+    session: Session!
+    input: PostCodeApiDetailInput!
+  ): PostCodeApiDetailOutput
+  # LANG_gql_LANG_gql_getSkisetMeasurements
+  getSkisetMeasurements(session: Session!): MeasurementsOutput
+  # LANG_gql_LANG_gql_getLyraFormToken
+  getLyraFormToken(
+    session: Session!
+    input: LyraFormTokenInput!
+  ): LyraFormTokenOutput
+
+  """
+   LANG_gql_getCriteria
+
+  ### LANG_gql_actions
+  """
+  getCriteriaInformation(
+    session: Session!
+    input: CriteriaInformationInput
+  ): CriteriaInformationOutput
+  # LANG_gql_requestPassword
+  renewPassword(
+    session: Session!
+    input: RenewPasswordInput
+  ): RenewPasswordOutput
+  # LANG_gql_requestLogin
+  getMyLogin(session: Session!, input: MyLoginInput): MyLoginOutput
+  # LANG_gql_requestBooklets
+  requestBrochure(session: Session!, input: BrochureInput): BrochureOutput
+  # LANG_gql_getReservations
+  getCustomerBookings(
+    session: Session!
+    input: CustomerBookingsInput
+  ): CustomerBookingsOutput
+  # LANG_gql_getReservationDocuments
+  getBookingDocuments(
+    session: Session!
+    input: BookingDocumentsInput!
+  ): BookingDocumentsOutput
+  # LANG_gql_getFidelityPoints
+  getCustomerLoyaltyPoints(session: Session!): CustomerLoyaltyPointsOutput
+  # LANG_gql_getGiftCodes
+  getCustomerGiftCodes(session: Session!): CustomerGiftCodesOutput
+  # LANG_gql_getPrivilegeCards
+  getCustomerPrivilegeCards(session: Session!): CustomerPrivilegeCardsOutput
+  # LANG_gql_getAvailForRoomTypes
+  getAvailForRoomTypes(
+    session: Session!
+    input: AvailForRoomTypesInput
+  ): AvailForRoomTypesOutput
+  # LANG_gql_getAlternativeProposalRulesForContractFolder
+  getAlternativeProposalRulesForContractFolder(
+    session: Session!
+    input: AlternativeProposalRulesForContractFolderInput!
+  ): AlternativeProposalRulesForContractFolderOutput
+  # LANG_gql_getResalysErrorList
+  getResalysErrorList(session: Session!): ResalysErrorListOutput
+  # LANG_gql_getUserLanguage
+  getUserLanguage(session: Session!): UserLanguageOutput
+
+  # LANG_gql_getFidelityRules
+  getFidelityRules(session: Session!): FidelityRulesOutput
+  # LANG_gql_getFidelityLogs
+  getFidelityLogs(session: Session!): FidelityLogsOutput
+  # LANG_gql_getRelationships
+  getRelationships(session: Session!): RelationshipOutput
+  # LANG_gql_getPartnerCustomers
+  getPartnerCustomers(session: Session!): PartnerCustomerInfoOutput
+  # LANG_gql_getOccupantsFromCurrentCustomer
+  getOccupantsFromCurrentCustomer(
+    session: Session!
+    input: OccupantsFromCurrentCustomerInput
+  ): OccupantsFromCurrentCustomerOutput
+  # LANG_gql_getOwnerLots
+  getOwnerLeases(session: Session!): OwnerleasesOutput
+  # LANG_gql_getOwnerRoomPlanningData
+  getOwnerRoomPlanningData(
+    session: Session!
+    input: OwnerRoomPlanningDataInput!
+  ): OwnerRoomPlanningDataOutput
+
+  # LANG_gql_getPendingFerryBooking
+  getPendingFerryBooking(session: Session!): PendingFerryBookingOutput
+  # LANG_gql_getFerryCivilities
+  getFerryCivilities(session: Session!): FerryCivilitiesOutput
+  # LANG_gql_getFerryNationalities
+  getFerryNationalities(session: Session!): FerryNationalitiesOutput
+  # LANG_gql_getFerryVehicleCategories
+  getFerryVehicleCategories(session: Session!): FerryVehicleCategoriesOutput
+  # LANG_gql_getFerryAddonCategories
+  getFerryAddonCategories(session: Session!): FerryAddonCategoriesOutput
+  # LANG_gql_getFerryTrailerCategories
+  getFerryTrailerCategories(session: Session!): FerryTrailerCategoriesOutput
+  # LANG_gql_getFerryVehicleFuels
+  getFerryVehicleFuels(session: Session!): FerryVehicleFuelsOutput
+  # LANG_gql_getFerryCars
+  getFerryCars(session: Session!): FerryCarsOutput
+  # LANG_gql_getFerryPorts
+  getFerryPorts(session: Session!): FerryPortsOutput
+  # LANG_gql_getFerryCrossings
+  getFerryCrossings(
+    session: Session!
+    input: FerryCrossingsInput
+  ): FerryCrossingsOutput
+  # LANG_gql_getFerryProposals
+  getFerryProposals(
+    session: Session!
+    input: FerryProposalsInput!
+  ): FerryProposalsOutput
+  # LANG_gql_getFerryAvailableAccommodations
+  getFerryAvailableAccommodations(
+    session: Session!
+  ): FerryAvailableAccommodationsOutput
+  # LANG_gql_getFerryProducts
+  getFerryProducts(session: Session!): FerryProductsOutput
+  # LANG_gql_getAvailableRooms
+  getAvailableRooms(
+    session: Session!
+    input: AvailableRoomsInput!
+  ): AvailableRoomsOutput
+  # LANG_gql_getPaymentLinkInfos
+  getPaymentLinkInfos(
+    paymentLinkAuthenticationInput: PaymentLinkAuthenticationInput!
+  ): PaymentLinkInfosOutput
+  # LANG_gql_getBookingCustomerDepositAccountInfos
+  getBookingCustomerDepositAccountInfos(
+    session: Session!
+  ): BookingCustomerDepositAccountInfosOutput
+}
+
+type ProductPropertiesOutput {
+  properties: [Property]
+}
+
+type ProductProposalsOutput {
+  proposals: [ProductProposal]
+}
+
+type ProductProposal {
+  productCode: String
+  label: String
+  desc: String
+  propertyId: Int
+  startDate: Date
+  endDate: Date
+  proposalKey: String!
+}
+
+type ProductCMSCriteriasOutput {
+  criterias: [ProductCMSCriteria]
+}
+
+type BookingCustomerDepositAccountInfosOutput {
+  customerDepositAccountInfos: [CustomerDepositAccountInfo]
+}
+
+type CustomerDepositAccountInfo {
+  depositAccount: CustomerDepositAccount
+  expectedDepositAmount: Amount
+  bookingId: Int
+  service: Service
+}
+
+type PaymentLinkInfosOutput {
+  customerBooking: CustomerBooking
+  occupant: Occupant
+  service: Service
+  customerDepositAccounts: [CustomerDepositAccount]
+  paymentMethod: PaymentMethod
+}
+
+type OwnerRoomPlanningDataOutput {
+  calendarPeriods: [CalendarPeriod]
+}
+
+type CalendarPeriod {
+  id: String
+  label: String
+  color: String
+  textColor: String
+  listPeriod: [DatePeriod]
+}
+
+type DatePeriod {
+  startDate: Date
+  endDate: Date
+}
+
+input OccupantsFromCurrentCustomerInput {
+  cartItemID: Int
+}
+
+type OccupantsFromCurrentCustomerOutput {
+  occupants: [Occupant]
+}
+
+type FerryCrossingsOutput {
+  crossings: [Crossing]
+}
+
+type Crossing {
+  departurePort: Port!
+  arrivalPort: Port!
+}
+
+input AvailableRoomsInput {
+  stayGuiid: Int!
+  allTypes: Boolean
+}
+
+type AvailableRoomsOutput {
+  availableRooms: [PlanningRoom]
+}
+
+type PlanningRoom {
+  roomNumber: String
+  label: String
+  roomTypeCode: String
+  available: Boolean
+  startDate: Date
+  endDate: Date
+}
+
+input FerryCrossingsInput {
+  departurePortName: String
+  arrivalPortName: String
+}
+
+type OwnerleasesOutput {
+  leases: [OwnerLease]
+}
+
+type OwnerLot {
+  id: Int
+  label: String
+  roomNumbers: [String]
+}
+
+type OwnerLease {
+  id: Int
+  etabId: Int
+  etabLabel: String
+  periods: [OwnerLeasePeriod]
+}
+
+type OwnerLeasePeriod {
+  id: Int
+  lots: [OwnerLot]
+}
+
+type ResalysErrorListOutput {
+  errorList: [ResalysError]
+}
+
+type ResalysError {
+  code: Int
+  message: String
+}
+
+input OwnerRoomPlanningDataInput {
+  campaignCode: String!
+  ownerLotId: Int!
+  month: Int
+  year: Int
+}
+
+input AlternativeProposalRulesForContractFolderInput {
+  contractFolderId: Int!
+}
+
+type AlternativeProposalRulesForContractFolderOutput {
+  alternativeProposalRules: [AlternativeProposalRule]
+}
+
+type AlternativeProposalRule {
+  id: Int!
+  priority: Int
+  label: String
+  dstProperties: [Property]
+  srcProperty: Property
+  roomFeatures: [CriteriaValue]
+}
+
+type ProductsForOccupantOutput {
+  hasProductsForOccupant: Boolean
+}
+
+input AvailForRoomTypesInput {
+  propertyId: Int!
+  roomTypeCodes: [String]
+  startDate: Date!
+  endDate: Date
+  nbDays: Int
+  nbAdults: Int!
+  nbBabies: Int
+  nbChildren1: Int
+  nbChildren2: Int
+  childrenBirthdate: [Date]
+  campaignCode: String!
+  baseProductCode: String
+}
+
+type AvailForRoomTypesOutput {
+  availabilityRoomTypes: [AvailabilityRoomType]
+}
+
+type AvailabilityRoomType {
+  availability: Int
+  roomType: RoomType
+  proposal: Proposal
+  bookable: Boolean
+  minAdults: Int
+  property: Property
+}
+
+type BrochureOutput {
+  requested: Boolean
+}
+
+input BrochureInput {
+  brochureIds: [String]
+}
+
+type MyLoginOutput {
+  login: Boolean
+}
+
+type RenewPasswordOutput {
+  renewPasswordDemand: Boolean
+}
+
+input RenewPasswordInput {
+  mail: String
+}
+
+type LogoutOutput {
+  logout: Boolean
+}
+
+type CustomerPrivilegeCardsOutput {
+  privilegeCards: [PrivilegeCard]
+}
+
+type CustomerGiftCodesOutput {
+  giftCodes: [GiftCode]
+}
+
+type CustomerLoyaltyPointsOutput {
+  points: Int
+}
+
+type BookingDocumentsOutput {
+  documents: [File]
+}
+
+input BookingDocumentsInput {
+  bookingId: Int!
+}
+
+type CustomerBookingsOutput {
+  customerBookings: [CustomerBooking]
+}
+
+type FidelityRulesOutput {
+  fidelityRules: [FidelityRule]
+}
+
+type FidelityLogsOutput {
+  fidelityLogs: [FidelityLog]
+}
+
+type RelationshipOutput {
+  relationships: [Relationship]
+}
+
+input CustomerBookingsInput {
+  option: Boolean
+  estimate: Boolean
+  canceled: Boolean
+  bookingIds: [Int]
+}
+
+type CriteriaInformationOutput {
+  criteria: Criteria
+}
+
+input CriteriaInformationInput {
+  code: String
+  customerCriteria: Boolean
+}
+
+type PostCodeApiDetailOutput {
+  code: String
+}
+
+input PostCodeApiDetailInput {
+  context: String!
+  apiSession: String!
+}
+
+type PostCodeApiSimpleOutput {
+  code: String
+}
+
+input PostCodeApiSimpleInput {
+  term: String!
+  country: String
+  postApiContext: String
+}
+
+type CampaignsOutput {
+  campaigns: [Option] @deprecated(reason: "Use 'campaignList'.")
+  campaignList: [Campaign]
+}
+
+type BrochuresOutput {
+  brochures: [Option] @deprecated(reason: "Use 'brochureList'.")
+  brochureList: [Brochure]
+}
+
+type Brochure {
+  code: String
+  label: String
+}
+
+type CustomerDepositAccountsOutput {
+  customerDepositAccounts: [CustomerDepositAccount]
+}
+
+type BookingRecordCriteriasOutput {
+  criterias: [Criteria]
+}
+
+type CustomerCriteriasOutput {
+  criterias: [Criteria]
+}
+
+input CustomerCriteriasInput {
+  criteriaCodes: [String]
+}
+
+type LanguagesOutput {
+  languages: [Language]
+}
+
+type CivilitiesOutput {
+  civilities: [Option] @deprecated(reason: "Use 'civilitiyList'.")
+  civilitiyList: [Civility]
+}
+
+type CountriesOutput {
+  countries: [Option] @deprecated(reason: "Use 'countryList'.")
+  countryList: [Country]
+}
+
+type Country {
+  code: String
+  label: String
+}
+
+type PrivilegeCardTypesOutput {
+  privilegeCardTypes: [Option]
+    @deprecated(reason: "Use 'privilegeCardTypeList'.")
+  privilegeCardTypeList: [PrivilegeCardType]
+}
+
+type PrivilegeCardType {
+  code: String
+  label: String
+}
+
+type PaymentMethodsOutput {
+  paymentMethod: PaymentMethod
+}
+
+type PaymentPlansOutput {
+  paymentPlans: [PaymentPlan]
+}
+
+type MapSelectorDataOutput {
+  mapSelectorData: MapSelectorData
+}
+
+input MapSelectorDataInput {
+  stayGuiid: Int!
+  cartItemID: Int
+}
+
+type AccommodationProductsOutput {
+  accommodationProducts: [ProductByCategory]
+}
+
+input AccommodationProductsInput {
+  stayGuiid: Int!
+  categoryCodes: [String]
+  excludeMandatoryProduct: Boolean
+  cartItemID: Int
+}
+
+type OccupantProductsOutput {
+  occupantProducts: [ProductByCategory]
+}
+
+type AllOccupantProductsAllAgeRangesOutput {
+  occupantProducts: [ProductByCategory]
+}
+
+input OccupantProductsInput {
+  occupantGuiid: Int!
+  categoryCodes: [String]
+  excludeMandatoryProduct: Boolean
+  cartItemID: Int
+}
+
+input HasProductsForOccupantInput {
+  excludeMandatoryProduct: Boolean
+  cartItemID: Int
+}
+
+input AllOccupantProductsAllAgeRangesInput {
+  stayGuiid: Int!
+  categoryCodes: [String]
+  cartItemID: Int
+}
+
+type BookingProductsOutput {
+  bookingProducts: [ProductByCategory]
+}
+
+input BookingProductsInput {
+  categoryCodes: [String]
+  excludeMandatoryInput: Boolean
+  cartItemID: Int
+}
+
+type ProductCategoriesOutput {
+  productCategories: [ProductCategory]
+}
+
+type ProductCategory {
+  code: String
+  label: String
+  order: Int
+}
+
+type AvailableRoomFeaturesOutput {
+  roomFeatures: [RoomFeature]
+}
+
+type RoomTypesOutput {
+  roomTypes: [Option] @deprecated(reason: "Use 'roomTypeList'.")
+  roomTypeList: [RoomType]
+}
+
+type UserLanguageOutput {
+  languageCode: String
+}
+
+input RoomTypesInput {
+  propertyId: Int
+  roomTypeCategoryCode: String
+}
+
+type RoomTypeCategoriesOutput {
+  roomTypeCategories: [RoomTypeCategory]
+}
+
+type RoomTypeCategory {
+  code: String
+  label: String
+  roomTypes: [RoomType]
+}
+
+input RoomTypeCategoriesInput {
+  propertyId: Int!
+}
+
+type PropertiesOutput {
+  properties: [Property]
+}
+
+input PropertiesInput {
+  stayType: Int
+  roomFeatureCodes: [String]
+  propertyIds: [Int]
+}
+
+type ProposalsByKeysOutput {
+  proposals: [Proposal!]!
+}
+
+type ProposalByRoomTypesOutput {
+  proposals: [Proposal!]!
+}
+
+input ProposalsByKeysInput {
+  proposalKeys: [String!]!
+}
+
+input ProposalByRoomTypesInput {
+  propertyId: Int!
+  roomTypeCodes: [String]!
+  baseProductCode: String!
+  startDate: Date!
+  endDate: Date
+  nbDays: Int
+  nbAdults: Int!
+  nbBabies: Int
+  nbChildren1: Int
+  nbChildren2: Int
+  childrenBirthdate: [Date]
+  campaignCode: String
+}
+
+type ProposalsByPropertiesOutput {
+  proposalByProperty: [ProposalByProperty!]!
+}
+
+input ProposalsByPropertiesInput {
+  criterias: Criterias
+}
+
+type ProposalsOutput {
+  proposals: [Proposal!]!
+}
+
+input ProposalsInput {
+  criterias: Criterias
+}
+
+type ModuleFacebookActivatedOutput {
+  activated: Boolean
+}
+
+type SessionActivatedOutput {
+  activated: Boolean
+}
+
+type PartnerOutput {
+  service: Service
+  primaryContact: PartnerContact
+}
+
+type PartnerCustomerInfoOutput {
+  customers: [PartnerCustomerInfo]
+}
+
+type PartnerCustomerInfo {
+  civility: String
+  name: String
+  firstName: String
+  externalCode: String
+  email: String
+  disabled: Boolean
+  customerCode: String
+}
+
+type NeobookingTranslationsOutput {
+  translations: [Language]
+}
+
+input NeobookingTranslationsInput {
+  languages: [String]
+}
+
+type TranslationsOutput {
+  translations: [Translation]
+}
+
+input TranslationsInput {
+  listLanguageVarCode: [String]
+}
+
+type ResalysVersionOutput {
+  version: String
+}
+
+type SalesChannelModeOutput {
+  mode: Int
+}
+
+input Session {
+  name: String
+}
+
+type SessionOutput {
+  name: String
+}
+
+input SessionInput {
+  username: String!
+  publicPartnerCode: String
+}
+
+input ValidLoginInput {
+  loginHashInput: LoginHash256Input!
+}
+
+type ValidLoginOutput {
+  valid: Boolean
+}
+
+input AuthenticationInput {
+  username: String!
+  password: String!
+}
+
+type ApiAliveOutput {
+  alive: Boolean
+}
+
+input SessionLanguageInput {
+  languageCode: String
+}
+
+type GiftCode {
+  # LANG_gql_Gif_Code_valid
+  valid: Boolean
+  # LANG_gql_Gif_Code_Used
+  used: Boolean
+  # LANG_gql_Gif_Code_Type
+  type: String
+  # LANG_gql_Gif_Code_Code
+  code: String
+  # LANG_gql_Gif_Code_Amount
+  amount: Amount
+  # LANG_gql_Gif_Code_Validity_Date
+  validityDate: Date
+  # LANG_gql_Gif_Code_Use_Date
+  useDate: Date
+  # LANG_gql_Gif_Code_Reservation_ID
+  bookingId: Int
+  # LANG_gql_Gif_Code_Label
+  label: String
+}
+
+type PrivilegeCard {
+  # LANG_gql_Gif_Code_Active
+  active: Boolean
+  # LANG_gql_Gif_Code_Reservation_ID
+  bookingId: Int
+  # LANG_gql_Gif_Code_Label
+  label: String
+  # LANG_gql_Gif_Code_Start_Date
+  startDate: Date
+  # LANG_gql_Gif_Code_End_Date
+  endDate: Date
+  # LANG_gql_Gif_Code_Type
+  type: String
+  # LANG_gql_Gif_Code_Service
+  service: Service
+  # LANG_gql_Gif_Code_Points
+  points: Int
+}
+
+type MapSelectorData {
+  fileSystemName: String!
+  imageHeight: Int
+  imageWidth: Int
+  listUhOnMap: [MapUH]
+  listUhSelected: [MapUH]
+  listUhDisabled: [MapUH]
+  stayMapInfos: StayMapInfos
+  zoom: Float
+  opacity: Float
+}
+
+type MapUH {
+  id: String!
+  label: String!
+  color: String!
+  roomTypeCode: String!
+  coordinates: [LatLng]!
+  textColor: String
+  strokeColor: String
+  stayGuiid: Int
+  stayRoomIndex: Int
+  shape: String!
+}
+
+type StayMapInfos {
+  stayGuiid: Int
+  hasNoAvailableRoom: Boolean
+  listStayRoomGuiid: [Int]
+}
+
+type LatLng {
+  lat: Float!
+  lng: Float!
+}
+
+input AvailableRoomFeaturesInput {
+  roomFeatureCodes: [String]
+  propertyIds: [Int]
+}
+
+type RoomFeature {
+  categoryLabel: String
+  code: String!
+  label: String
+  options: [RoomFeatureOption]
+}
+
+type RoomFeatureOption {
+  code: String!
+  label: String
+}
+
+input MyLoginInput {
+  firstName: String
+  lastName: String
+  zipCode: String
+  email: String
+}
+
+type CustomerBookingStatus {
+  code: String
+  label: String
+  default: Boolean
+}
+
+type CustomerBookingSubStatus {
+  id: Int
+  label: String
+  default: Boolean
+}
+
+type Translation {
+  code: String
+  value: String
+}
+
+type Language {
+  code: String
+  label: String
+  codeLanguage: String @deprecated(reason: "Use 'code'.")
+  labelLanguage: String @deprecated(reason: "Use 'label'.")
+  languageVars: [Translation]
+}
+
+type Mutation {
+  """
+   LANG_gql_partnerLogin
+
+  ---
+
+  ##  LANG_gql_resa
+  ### LANG_gql_actions
+  """
+  addPartnerToCart(
+    session: Session!
+    input: PartnerToCartInput!
+  ): PartnerToCartOutput
+  # LANG_gql_addPartner
+  loginPartner(session: Session!, input: LoginPartnerInput): LoginPartnerOutput
+  # LANG_gql_logout
+  logout(session: Session!): LogoutOutput
+  # LANG_gql_switchToPartnerConvention
+  switchToPartnerConvention(
+    session: Session!
+    input: SwitchToPartnerConventionInput!
+  ): SwitchToPartnerConventionOutput
+  # LANG_gql_chooseProposalFromKeys
+  chooseProposalFromKeys(
+    session: Session!
+    input: ChooseProposalFromKeysInput!
+  ): ChooseProposalFromKeysOutput
+  # LANG_gql_resetCart
+  resetCart(session: Session!): ResetCartOutput
+  # LANG_gql_saveCart
+  saveCart(session: Session!, input: SaveCartInput): SaveCartOutput
+  # LANG_gql_updateCartPaymentMethod
+  updateCartPaymentMethod(
+    session: Session!
+    input: CartPaymentMethodInput!
+  ): CartPaymentMethodOutput
+  # LANG_gql_updateCartPaymentsDue
+  updateCartPaymentPlans(
+    session: Session!
+    input: CartPaymentPlansInput
+  ): CartPaymentPlansOutput
+  updatePartnerPaymentPlans(
+    session: Session!
+    input: PartnerPaymentPlansInput
+  ): PartnerPaymentPlansOutput
+  updatePayerPaymentPlans(
+    session: Session!
+    input: PayerPaymentPlansInput
+  ): PayerPaymentPlansOutput
+  # LANG_gql_removeStay
+  removeStay(session: Session!, input: RemoveStayInput!): RemoveStayOutput
+  # LANG_gql_addOccupant
+  addOccupant(session: Session!, input: AddOccupantInput!): AddOccupantOutput
+  # LANG_gql_addBaby
+  addBaby(session: Session!, input: AddBabyInput!): AddBabyOutput
+  # LANG_gql_removeOccupant
+  removeOccupant(
+    session: Session!
+    input: RemoveOccupantInput!
+  ): RemoveOccupantOutput
+  # LANG_gql_updateOccupantsCount
+  updateTotalOccupants(
+    session: Session!
+    input: TotalOccupantsInput!
+  ): TotalOccupantsOutput
+  # LANG_gql_updateOccupant
+  updateOccupant(session: Session!, input: OccupantInput!): OccupantOutput
+  # LANG_gql_updatePrimaryOccupant
+  updatePrimaryOccupant(
+    session: Session!
+    input: PrimaryOccupantInput!
+  ): PrimaryOccupantOutput
+  # LANG_gql_updateStayTime
+  updateStayTime(session: Session!, input: StayTimeInput!): StayTimeOutput
+  # LANG_gql_addProductToOccupant
+  addProductToOccupant(
+    session: Session!
+    input: [ProductToOccupantInput]!
+  ): ProductToOccupantOutput
+  # LANG_gql_addProduct
+  addProductToBooking(
+    session: Session!
+    input: ProductToBookingInput!
+  ): ProductToBookingOutput
+  #LANG_gql_updateRoomFromMap
+  updateRoomFromMap(
+    session: Session!
+    input: RoomFromMapInput!
+  ): RoomFromMapOutput
+  # LANG_gql_deleteReservationFromCart
+  removeBookingFromCart(
+    session: Session!
+    input: RemoveBookingFromCartInput
+  ): RemoveBookingFromCartOutput
+  # LANG_gql_addObservation
+  addObservation(session: Session!, input: ObservationInput!): ObservationOutput
+  # LANG_gql_addDiscountCode
+  addDiscountCode(
+    session: Session!
+    input: DiscountCodeInput!
+  ): DiscountCodeOutput
+  # LANG_gql_removeDiscountCode
+  removeDiscountCode(session: Session!): RemoveDiscountCodeOutput
+  # LANG_gql_addGiftCode
+  addGiftCode(session: Session!, input: GiftCodeInput): GiftCodeOutput
+  # LANG_gql_removeGiftCode
+  removeGiftCode(
+    session: Session!
+    input: RemoveGiftCodeInput
+  ): RemoveGiftCodeOutput
+
+  # LANG_gql_aaddFidelityPointToProduct
+  addFidelityPointToProduct(
+    session: Session!
+    input: FidelityPointToProductInput!
+  ): FidelityPointToCartOutput
+
+  ## LANG_gql_client
+  # LANG_gql_login
+  login(session: Session!, input: LoginInput!): LoginOutput
+  # LANG_gql_loginAnyclientType
+  loginAnyCustomerType(
+    session: Session!
+    input: LoginAnyCustomerTypeInput
+  ): LoginAnyCustomerTypeOutput
+  # LANG_gql_login
+  loginHash256(session: Session!, input: LoginHash256Input!): LoginHash256Output
+  # LANG_gql_facebookLogin
+  facebookLogin(
+    session: Session!
+    input: FacebookLoginInput!
+  ): FacebookLoginOutput
+  # LANG_gql_login_by_voucher
+  loginETOMode(session: Session!, input: LoginETOModeInput!): LoginETOModeOutput
+  # LANG_gql_register
+  createCustomerAccount(
+    session: Session!
+    input: CreateCustomerAccountInput
+  ): CreateCustomerAccountOutput
+  # LANG_gql_updateCustomer
+  updateCustomerAccount(
+    session: Session!
+    input: CustomerAccountInput
+  ): CustomerAccountOutput
+  # LANG_gql_deleteCustomer
+  removeCustomerAccount(session: Session!): RemoveCustomerAccountOutput
+
+  # LANG_gql_register_service
+  createServiceCustomerAccount(
+    session: Session!
+    input: CreateServiceCustomerAccountInput
+  ): CustomerAccountOutput
+  # LANG_gql_updateServiceCustomer
+  updateServiceCustomerAccount(
+    session: Session!
+    input: UpdateServiceCustomerAccountInput
+  ): CustomerAccountOutput
+  # LANG_gql_deleteServiceCustomer
+  disableServiceCustomerAccount(
+    session: Session!
+    input: DisableServiceCustomerAccountInput
+  ): CustomerAccountOutput
+  # LANG_gql_updatePartnerCustomerAccount
+  updatePartnerCustomerAccount(
+    session: Session!
+    input: UpdatePartnerCustomerAccountInput
+  ): CustomerAccountOutput
+  # LANG_gql_uaddPartnerCustomerAccount
+  addPartnerCustomerAccount(
+    session: Session!
+    input: AddPartnerCustomerAccountInput
+  ): CustomerAccountOutput
+  # LANG_gql_updatePartnerCustomerAccount
+  disableEnablePartnerCustomerAccount(
+    session: Session!
+    input: DisableEnablePartnerCustomerAccountInput
+  ): CustomerAccountOutput
+
+  # LANG_gql_addReservationToCart
+  updateCustomerBooking(
+    session: Session!
+    input: CustomerBookingInput!
+  ): CustomerBookingOutput
+  # LANG_gql_updatePartnerAccount
+  updatePartnerAccount(
+    session: Session!
+    input: PartnerAccountInput
+  ): PartnerOutput
+  # LANG_gql_doFastCheckin
+  doFastCheckin(
+    session: Session!
+    input: DoFastCheckinInput
+  ): DoFastCheckinOutput
+  # LANG_gql_doFastCheckout
+  doFastCheckout(
+    session: Session!
+    input: DoFastCheckoutInput
+  ): DoFastCheckoutOutput
+  # LANG_gql_LconfirmFastCheckout
+  confirmFastCheckout(
+    session: Session!
+    input: ConfirmFastCheckoutInput
+  ): ConfirmFastCheckoutOutput
+  # LANG_gql_redirectPaymentduePaymentGateway
+  redirectPaymentGatewayForInstalment(
+    session: Session!
+    input: PaymentGatewayForInstalmentInput!
+  ): PaymentGatewayForInstalmentOutput
+  # LANG_gql_redirectCartPaymentGateway
+  redirectPaymentGatewayForCart(
+    session: Session!
+    input: PaymentGatewayForCartInput!
+  ): PaymentGatewayForCartOutput
+  # LANG_gql_LANG_gql_redirectGlobalPayGateway
+  redirectPaymentGatewayForAmount(
+    session: Session!
+    input: PaymentGatewayForAmountInput!
+  ): PaymentGatewayForAmountOutput
+  # LANG_gql_LANG_gql_addCustomerAccountPayment
+  addCustomerDepositAccountPayments(
+    session: Session!
+    input: CustomerDepositAccountPaymentsInput
+  ): CustomerDepositAccountPaymentsOutput
+  # LANG_gql_removePaymentWithAccount
+  removeCartPayments(session: Session!): RemoveCartPaymentsOutput
+  # LANG_gql_expireSession
+  expireSession(session: Session!): ExpireSessionOutput
+  # LANG_gql_unlockBooking
+  unlockBooking(
+    session: Session!
+    input: UnlockBookingInput!
+  ): UnlockBookingOutput
+  # LANG_gql_updateBookingCriterias
+  updateBookingCriterias(
+    session: Session!
+    input: UpdateBookingCriteriasInput!
+  ): UpdateBookingCriteriasOutput
+  # LANG_gql_updateSkisetMeasurements
+  updateOccupantSkisetMeasurements(
+    session: Session!
+    input: UpdateOccupantSkisetMeasurementsInput!
+  ): UpdateOccupantSkisetMeasurementsOutput
+  # LANG_gql_changePassword
+  changePassword(
+    session: Session!
+    input: ChangePasswordInput!
+  ): ChangePasswordOutput
+  # LANG_gql_chooseFerryProposal
+  chooseFerryProposal(
+    session: Session!
+    input: ChooseFerryProposalInput!
+  ): ChooseFerryProposalOutput
+  # LANG_gql_chooseRoundTripProposals
+  chooseRoundTripProposals(
+    session: Session!
+    input: ChooseRoundTripProposalsInput!
+  ): ChooseRoundTripProposalsOutput
+  # LANG_gql_updateFerryAccommodations
+  updateFerryAccommodations(
+    session: Session!
+    input: UpdateFerryAccommodationsInput!
+  ): UpdateFerryAccommodationsOutput
+  # LANG_gql_updateFerryTravelersInformation
+  updateFerryTravelersInformation(
+    session: Session!
+    input: UpdateFerryTravelersInformationInput!
+  ): UpdateFerryTravelersInformationOutput
+  # LANG_gql_saveFerryBooking
+  saveFerryBooking(
+    session: Session!
+    input: SaveFerryBookingInput
+  ): SaveFerryBookingOutput
+  # LANG_gql_cancelFerryBooking
+  cancelFerryBooking(
+    session: Session!
+    input: CancelFerryBookingInput
+  ): CancelFerryBookingOutput
+  # LANG_gql_updateFerryBooking
+  updateFerryBooking(
+    session: Session!
+    input: UpdateFerryBookingInput!
+  ): UpdateFerryBookingOutput
+  # LANG_gql_resetPendingFerryBooking
+  resetPendingFerryBooking(session: Session!): ResetPendingFerryBookingOutput
+  # LANG_gql_payOnStoredCreditCard
+  payOnStoredCreditCard(
+    session: Session!
+    input: payOnStoredCreditCardInput
+  ): payOnStoredCreditCardOutput
+  # LANG_gql_psetSessionLanguage
+  setSessionLanguage(
+    session: Session!
+    input: SessionLanguageInput!
+  ): UserLanguageOutput
+  # LANG_gql_udpateProductCriterias
+  updateProductCriterias(
+    session: Session!
+    input: UpdateProductCriteriasInput!
+  ): UpdateBookingCriteriasOutput
+  # LANG_gql_validateLyraPayment
+  validateLyraPayment(
+    session: Session!
+    input: LyraPaymentValidationInput!
+  ): LyraPaymentValidationOutput
+  # LANG_gql_assignRoom
+  assignRoom(session: Session!, input: AssignRoomInput!): AssignRoomOutput
+  # LANG_gql_unassignRoom
+  unassignRoom(session: Session!, input: UnassignRoomInput!): UnassignRoomOutput
+  # LANG_gql_uploadFiles
+  uploadFiles(session: Session!, input: [UploadFileInput]!): UploadFilesOutput
+
+  # LANG_gql_redirectPaymentGatewayFromPaymentLink
+  redirectPaymentGatewayFromPaymentLink(
+    paymentLinkAuthenticationInput: PaymentLinkAuthenticationInput!
+    input: PaymentGatewayFromPaymentLinkInput
+  ): PaymentGatewayFromPaymentLinkOutput
+  # LANG_gql_addCustomerDepositAccountPaymentsFromPaymentLink
+  addCustomerDepositAccountPaymentsFromPaymentLink(
+    paymentLinkAuthenticationInput: PaymentLinkAuthenticationInput!
+    input: CustomerDepositAccountPaymentsInputFromPaymentLink
+  ): CustomerDepositAccountPaymentsOutputFromPaymentLink
+
+  # LANG_gql_redirectPaymentGatewayForAccount
+  redirectPaymentGatewayForAccount(
+    session: Session!
+    input: PaymentGatewayForAccountInput!
+  ): PaymentGatewayForAccountOutput
+
+  # LANG_gql_generateLyraFormToken
+  generateLyraFormToken(
+    session: Session!
+    input: LyraFormTokenInput!
+  ): LyraFormTokenOutput
+}
+
+input PaymentGatewayForAccountInput {
+  accountId: Int!
+  input: CartPaymentMethodInput!
+}
+
+type PaymentGatewayForAccountOutput {
+  gateway: String
+}
+
+input UploadFileInput {
+  fileName: String!
+}
+
+type UploadFilesOutput {
+  uploadData: [UploadFileData]
+}
+
+type UploadFileData {
+  uploadUrl: String!
+  fileId: String!
+}
+
+input AssignRoomInput {
+  stayGuiid: Int!
+  roomNumber: String!
+}
+
+input UnassignRoomInput {
+  stayGuiid: Int!
+}
+
+input UpdateProductCriteriasInput {
+  lineitemGUIID: Int!
+  criterias: [CriteriaValueInput]
+}
+
+input payOnStoredCreditCardInput {
+  paymentDueGuiid: Int!
+  creditcardGuiid: Int!
+  amount: AmountInput!
+}
+
+type payOnStoredCreditCardOutput {
+  cart: Cart
+}
+
+input UpdateOccupantSkisetMeasurementsInput {
+  occupantSkisetMeasurements: [OccupantMeasurementInput]
+  cartItemID: Int
+}
+
+input OccupantMeasurementInput {
+  occupantGuiid: Int!
+  measureType: SkisetMeasureType!
+  measureId: Int!
+}
+
+type OccupantMeasurement {
+  measureType: SkisetMeasureType!
+  measureId: Int!
+}
+
+type UpdateOccupantSkisetMeasurementsOutput {
+  cart: Cart
+}
+
+type ChangePasswordOutput {
+  message: String!
+}
+
+input ChangePasswordInput {
+  token: String!
+  password: String!
+  confirmPassword: String!
+}
+
+input UpdateBookingCriteriasInput {
+  criterias: [CriteriaValueInput]
+  cartItemID: Int
+}
+
+type UpdateBookingCriteriasOutput {
+  cart: Cart
+}
+
+input UnlockBookingInput {
+  bookingId: Int!
+}
+
+type UnlockBookingOutput {
+  bookingUnlocked: Boolean
+}
+
+type ExpireSessionOutput {
+  isExpired: Boolean
+}
+
+type RemoveCartPaymentsOutput {
+  removed: Boolean
+}
+
+type PrimaryOccupantOutput {
+  cart: Cart
+}
+
+type CustomerDepositAccountPaymentsOutput {
+  reservation: CustomerBooking
+}
+
+type CustomerDepositAccountPaymentsOutputFromPaymentLink {
+  reservation: CustomerBooking
+}
+
+input CustomerDepositAccountPaymentsInput {
+  bookingId: Int!
+  currencyCode: String!
+  depositAccountPayments: [DepositAccountPaymentInput]
+}
+
+input CustomerDepositAccountPaymentsInputFromPaymentLink {
+  depositAccountPayments: [DepositAccountPaymentInput]
+}
+
+type PaymentGatewayForAmountOutput {
+  gateway: String
+}
+
+input PaymentGatewayForAmountInput {
+  bookingId: Int!
+  ccAmount: BigDecimal!
+  input: CartPaymentMethodInput!
+  instalmentId: Int!
+}
+
+type PaymentGatewayForCartOutput {
+  gateway: String
+}
+
+input PaymentGatewayForCartInput {
+  input: CartPaymentMethodInput!
+  passNewAmountLowerThanPrevious: Boolean
+}
+
+type PaymentGatewayForInstalmentOutput {
+  gateway: String
+}
+
+input PaymentGatewayForInstalmentInput {
+  instalmentId: Int!
+  input: CartPaymentMethodInput!
+}
+
+type ConfirmFastCheckoutOutput {
+  cart: Cart
+}
+
+input ConfirmFastCheckoutInput {
+  confirmFastCheckout: Boolean
+  cartItemID: Int
+}
+
+type DoFastCheckoutOutput {
+  reservation: CustomerBooking
+}
+
+input DoFastCheckoutInput {
+  bookingId: Int
+}
+
+type DoFastCheckinOutput {
+  reservation: CustomerBooking
+}
+
+input DoFastCheckinInput {
+  bookingId: Int
+  isDepositCashless: Boolean
+}
+
+type CustomerBookingOutput {
+  cart: Cart
+}
+
+input CustomerBookingInput {
+  bookingId: Int!
+  fastCheckinCheckout: Boolean
+}
+
+type RemoveCustomerAccountOutput {
+  removed: Boolean
+}
+
+type CustomerAccountOutput {
+  service: Service
+}
+
+input CustomerAccountInput {
+  account: AccountInput
+  civility: String
+  # LANG_gql_firstName
+  firstName: String!
+  # LANG_gql_lastName
+  lastName: String
+  # LANG_gql_birthDate
+  birthDate: Date!
+  # LANG_gql_languageCode
+  languageCode: String
+  # LANG_gql_address
+  address: CustomerAddressInput
+  # LANG_gql_criterias
+  criterias: [CriteriaValueInput]
+}
+
+input PartnerAccountInput {
+  account: AccountInput
+  # LANG_gql_partnerName
+  partnerName: String
+  civility: String
+  # LANG_gql_lastName
+  contactName: String
+  # LANG_gql_birthDate
+  birthDate: Date
+  # LANG_gql_languageCode
+  languageCode: String
+  # LANG_gql_address
+  address: CustomerAddressInput
+}
+
+input UpdateServiceCustomerAccountInput {
+  # LANG_gql_serviceId
+  serviceId: Int!
+  # LANG_gql_civility
+  civility: String
+  # LANG_gql_firstName
+  firstName: String
+  # LANG_gql_lastName
+  lastName: String
+  # LANG_gql_birthDate
+  birthDate: Date
+  # LANG_gql_relationShipId
+  relationshipId: Int
+}
+
+input CreateServiceCustomerAccountInput {
+  # LANG_gql_civility
+  civility: String
+  # LANG_gql_firstName
+  firstName: String
+  # LANG_gql_lastName
+  lastName: String!
+  # LANG_gql_birthDate
+  birthDate: Date!
+  # LANG_gql_relaltionShip
+  relaltionshipId: Int
+}
+
+input DisableServiceCustomerAccountInput {
+  serviceId: Int
+}
+
+input DisableEnablePartnerCustomerAccountInput {
+  # LANG_gql_customerCode
+  customerCode: String!
+  disabled: Boolean!
+}
+
+input UpdatePartnerCustomerAccountInput {
+  # LANG_gql_customerCode
+  customerCode: String!
+  # LANG_gql_civility
+  civility: String
+  # LANG_gql_firstName
+  firstName: String
+  # LANG_gql_lastName
+  lastName: String
+  # LANG_gql_birthDate
+  birthDate: Date
+  # LANG_gql_relaltionShip
+  relationshipId: Int
+  address: CustomerAddressInput!
+}
+
+input AddPartnerCustomerAccountInput {
+  # LANG_gql_civility
+  civility: String
+  # LANG_gql_firstName
+  firstName: String!
+  # LANG_gql_lastName
+  lastName: String!
+  # LANG_gql_birthDate
+  birthDate: Date!
+  # LANG_gql_relaltionShip
+  relationshipId: Int
+  address: CustomerAddressInput!
+}
+
+input ServiceRelationship {
+  serviceId: Int!
+  relationship: Int!
+}
+
+type CreateCustomerAccountOutput {
+  service: Service
+}
+
+input CreateCustomerAccountInput {
+  # LANG_gql_account
+  account: AccountInput
+  civility: String
+  # LANG_gql_firstName
+  firstName: String!
+  # LANG_gql_lastName
+  lastName: String!
+  # LANG_gql_birthDate
+  birthDate: Date!
+  # LANG_gql_languageCode
+  languageCode: String
+  # LANG_gql_address
+  address: CustomerAddressInput!
+  # LANG_gql_criterias
+  criterias: [CriteriaValueInput]
+  cartItemID: Int
+  customerCode: String
+}
+
+type LoginETOModeOutput {
+  service: Service
+}
+
+input LoginETOModeInput {
+  bookingId: String!
+  startDate: RslDate!
+  value: String!
+}
+
+type FacebookLoginOutput {
+  service: Service
+}
+
+input FacebookLoginInput {
+  facebookID: String!
+}
+
+type LoginAnyCustomerTypeOutput {
+  service: Service
+}
+
+input LoginAnyCustomerTypeInput {
+  login: String!
+  password: String!
+}
+
+type LoginOutput {
+  service: Service
+}
+
+type LoginHash256Output {
+  service: Service
+}
+
+input LoginInput {
+  login: String!
+  password: String!
+}
+
+input LoginHash256Input {
+  login: String!
+  password: String!
+  hash: String!
+  cartItemID: Int
+}
+
+type CurrentCustomerAccountOutput {
+  service: Service
+}
+
+input RemoveGiftCodeInput {
+  giftCode: String!
+  cartItemID: Int
+}
+
+type RemoveGiftCodeOutput {
+  cart: Cart
+}
+
+type GiftCodeOutput {
+  cart: Cart
+}
+
+input GiftCodeInput {
+  giftCode: String!
+  cartItemID: Int
+}
+
+type RemoveDiscountCodeOutput {
+  cart: Cart
+}
+
+type DiscountCodeOutput {
+  cart: Cart
+}
+
+input DiscountCodeInput {
+  discountCode: String!
+  cartItemID: Int
+}
+
+type ObservationOutput {
+  cart: Cart
+}
+
+input ObservationInput {
+  observation: String!
+  # LANG_gql_reservationCartItemIDs
+  bookingCartItemIDs: [Int]
+  cartItemID: Int
+}
+
+type RemoveBookingFromCartOutput {
+  cart: Cart
+}
+
+input RemoveBookingFromCartInput {
+  bookingCartItemID: Int!
+}
+
+type RemoveFerryOutput {
+  cart: Cart
+}
+
+input RemoveFerryInput {
+  ferryID: String!
+}
+
+type ProductToBookingOutput {
+  cart: Cart
+}
+
+type RoomFromMapOutput {
+  cart: Cart
+}
+
+type ProductToOccupantOutput {
+  cart: Cart
+}
+
+type OccupantOutput {
+  cart: Cart
+}
+
+type StayTimeOutput {
+  cart: Cart
+}
+
+input OccupantInput {
+  occupantGuiid: Int!
+  lastName: String
+  firstName: String
+  birthDate: Date
+  civilityCode: String
+  cartItemID: Int
+}
+
+input StayTimeInput {
+  stayGuiid: Int!
+  arrivalTime: LocalTime
+  departureTime: LocalTime
+  cartItemID: Int
+}
+
+type TotalOccupantsOutput {
+  cart: Cart
+}
+
+type RemoveOccupantOutput {
+  cart: Cart
+}
+
+input RemoveOccupantInput {
+  occupantGuiid: Int!
+  cartItemID: Int
+}
+
+type AddBabyOutput {
+  cart: Cart
+}
+
+input AddBabyInput {
+  stayGuiid: Int!
+  cartItemID: Int
+}
+
+type AddOccupantOutput {
+  cart: Cart
+}
+
+input AddOccupantInput {
+  stayGuiid: Int!
+  occupantType: OccupantTypeEnum
+  cartItemID: Int
+}
+
+type RemoveStayOutput {
+  cart: Cart
+}
+
+type PayerPaymentPlansOutput {
+  cart: Cart
+}
+
+input PayerPaymentPlansInput {
+  paymentPlan: String
+}
+
+type PartnerPaymentPlansOutput {
+  cart: Cart
+}
+
+input PartnerPaymentPlansInput {
+  paymentPlan: String
+}
+
+type CartPaymentPlansOutput {
+  cart: Cart
+}
+
+type CartPaymentMethodOutput {
+  cart: Cart
+}
+
+type SaveCartOutput {
+  cart: Cart
+}
+
+type ResetCartOutput {
+  cart: Cart
+}
+
+type ChooseProposalFromKeysOutput {
+  cart: Cart
+}
+
+input ChooseProposalFromKeysInput {
+  proposalKeys: [String!]!
+  occupantList: [ChooseProposalFromKeysOccupantInput]
+  notPopulateOccupantFromService: Boolean
+  cartItemID: Int
+  notGroupStays: Boolean
+}
+
+input ChooseProposalFromKeysOccupantInput {
+  lastName: String
+  firstName: String
+  birthDate: Date
+  civilityCode: String
+}
+
+type SwitchToPartnerConventionOutput {
+  cart: Cart
+}
+
+input SwitchToPartnerConventionInput {
+  partnerCode: String!
+  CartItemID: Int
+}
+
+type LoginPartnerOutput {
+  service: Service
+}
+
+input LoginPartnerInput {
+  login: String!
+  password: String!
+}
+
+type FidelityPointToCartOutput {
+  cart: Cart
+}
+
+type PartnerToCartOutput {
+  service: Service
+}
+
+input PartnerToCartInput {
+  partnerCode: String!
+}
+
+input FidelityPointToProductInput {
+  fidelityPoints: Int!
+  lineItemGuiid: Int!
+}
+
+input LyraFormTokenInput {
+  instalmentId: Int
+  amount: AmountInput!
+  paymentLinkContext: Boolean
+  customerAccountContext: Boolean
+  globalPay: Boolean
+  url: PspUrl
+}
+
+input DepositAccountPaymentInput {
+  accountID: Int!
+  amount: AmountInput!
+}
+
+input AmountInput {
+  amount: BigDecimal
+  currencyCode: String
+}
+
+input ProductToBookingInput {
+  productCode: String!
+  productID: Int!
+  quantity: Int
+  stayGuiid: Int
+  cartItemID: Int
+}
+
+input RoomFromMapInput {
+  stayGuiid: Int!
+  mapUHID: [String]!
+  cartItemID: Int
+}
+
+input ProductToOccupantInput {
+  occupantGuiid: Int!
+  productCode: String!
+  productID: Int!
+  quantity: Int!
+}
+
+input TotalOccupantsInput {
+  stayGuiid: Int!
+  nbAdults: Int
+  nbChildren1: Int
+  nbChildren2: Int
+  nbBabies: Int
+  cartItemID: Int
+}
+
+input RemoveStayInput {
+  stayGuiid: Int!
+  lastStayRemoveAllFerryConfirmed: Boolean
+}
+
+input CartPaymentMethodInput {
+  ccardType: Int
+  paymentMode: String
+  paymentOptions: String
+  automaticPayment: Boolean
+  manualPaymentOptions: String
+  paymentModeSetOnlyFirst: Boolean
+  paymentAmount: String
+  chequeNumber: String
+  url: PspUrl
+  bookingStatus: BookingStatus!
+  forceSaveGuaranteedStatus: Boolean
+}
+
+input CartPaymentPlansInput {
+  paymentPlan: String
+  partnerPaymentPlan: String
+  cartItemID: Int
+}
+
+type CartOutput {
+  cart: Cart
+}
+
+type Cart {
+  id: Int
+  reservations: [CustomerBooking]
+  fromFastCheckinCheckout: Boolean
+}
+
+type Service {
+  id: Int
+  login: String
+  customerCode: String
+  firstName: String
+  lastName: String
+  civility: Civility
+  birthDate: RslDate
+  language: Option @deprecated(reason: "Use 'serviceLanguage'.")
+  serviceLanguage: Language
+  address: Address
+  criterias: [CriteriaValue]
+  servicesList: [Service]
+  customerType: CustomerType
+  relationshipObject: Relationship
+  clientType: ClientType
+  relationship: String @deprecated(reason: "Use 'relationshipObject'.")
+  fidelityPoints: Int
+  needValidation: Boolean
+  disabled: Boolean
+  defaultPartnerServiceDisabled: Boolean
+}
+
+type PartnerContact {
+  name: String
+  mail: String
+  phone1: String
+  phone2: String
+}
+
+type CustomerType {
+  code: String!
+  label: String
+}
+
+type Relationship {
+  id: Int!
+  label: String
+}
+
+type ClientType {
+  id: Int!
+  label: String
+}
+
+type PrimaryOccupant {
+  id: Int
+  customerCode: String
+  firstName: String
+  lastName: String
+  civility: Civility
+  birthDate: RslDate
+  language: Option @deprecated(reason: "Use 'occupantLanguage'.")
+  occupantLanguage: Language
+  address: Address
+}
+
+type Address {
+  # LANG_gql_streetName
+  streetName: String
+  # LANG_gql_addressComplementary1
+  addressComplementary1: String
+  # LANG_gql_addressComplementary2
+  addressComplementary2: String
+  # LANG_gql_postalLocality
+  postalLocality: String
+  # LANG_gql_zipCode
+  zipCode: String
+  # LANG_gql_city
+  city: String
+  # LANG_gql_country
+  country: Option @deprecated(reason: "Use 'addressCountry'.")
+  addressCountry: Country
+  # LANG_gql_phone1
+  phone1: String
+  # LANG_gql_phone2
+  phone2: String
+  # LANG_gql_fax
+  fax: String
+  # LANG_gql_mail
+  mail: String
+  # LANG_gql_latitude
+  latitude: String
+  # LANG_gql_longitude
+  longitude: String
+}
+
+type CriteriaValue {
+  code: String!
+  label: String
+  value: String
+  servicesList: [Service]
+  type: Int
+  fileName: String
+  startDate: Date
+  fileUrl: String
+}
+
+type Civility {
+  code: String
+  label: String
+}
+
+type Amount {
+  amount: BigDecimal
+  currencyCode: String
+}
+
+type ContractFolder {
+  id: Int!
+  label: String
+  cmsCriterias: [CriteriaValue]
+}
+
+type CustomerBooking {
+  id: Int
+  externalCode: String
+  cartID: Int
+  cartItemID: Int
+  campaign: Campaign
+  property: Property
+  nbDays: Int
+  startDate: Date
+  endDate: Date
+  discountCode: String
+  observation: String
+  isOption: Boolean
+  isEstimate: Boolean
+  isCanceled: Boolean
+  status: CustomerBookingStatus
+  subStatus: CustomerBookingSubStatus
+  stays: [Stay]
+  totalAmount: Amount
+  primaryOccupant: PrimaryOccupant
+  isEnableFastCheckin: Boolean
+  isEnableFastCheckout: Boolean
+  isEnableEditReservation: Boolean
+  isEnableEditPrimaryOccupant: Boolean
+  isEnableFerryBooking: Boolean
+  selectedPaymentDue: String
+  selectedPaymentMethod: String
+  selectedPaymentCCType: Int
+  isPSPPayment: Boolean
+  contractFolder: ContractFolder
+  optionDate: Date
+  creationDate: Date
+  partner: Service
+  criterias: [CriteriaValue]
+  salesperson: User
+  isFCIdone: Boolean
+  isMaster: Boolean
+  paymentStarted: Boolean
+}
+
+type User {
+  name: String
+  userType: UserType
+  profile: UserProfile
+  grouping: UserGrouping
+}
+
+type UserType {
+  code: Int
+  label: String
+}
+
+type UserProfile {
+  code: String
+  label: String
+}
+
+type UserGrouping {
+  code: String
+  label: String
+}
+
+type Property {
+  id: Int
+  label: String
+  address: Address
+  description: String
+  cmsCriterias: [CriteriaValue]
+  roomFeatures: [CriteriaValue]
+  imagePath: String
+}
+
+type Stay {
+  id: Int
+  guiid: Int
+  startDate: Date
+  endDate: Date
+  nbDays: Int
+  distribution: Distribution
+  occupants: [Occupant]
+  totalAmount: Amount
+  proposalkey: String
+  arrivalTime: LocalTime
+  departureTime: LocalTime
+}
+
+type Occupant {
+  id: Int
+  guiid: Int
+  lastName: String
+  firstName: String
+  birthDate: Date
+  civility: Civility
+  lineItems: [Lineitem]
+  totalAmount: Amount
+  giftVoucherCode: String
+  paymentDues: [PaymentDue]
+  isAdult: Boolean
+  isChildren1: Boolean
+  isChildren2: Boolean
+  isBaby: Boolean
+  skisetMeasurements: [OccupantMeasurement]
+}
+
+type Lineitem {
+  id: Int
+  guiid: Int
+  label: String
+  preReserved: Boolean
+  quantity: Float
+  discounts: [Discount]
+  totalAmount: Amount
+  product: Product
+  totalAmountWithoutDiscount: Amount
+  isSkiset: Boolean
+  ferryBooking: FerryBooking
+  duration: Int
+  criterias: [CriteriaValue]
+}
+
+type PaymentDue {
+  id: Int
+  guiid: Int
+  code: String
+  amount: Amount
+  receivedAmount: Amount
+  remainingAmount: Amount
+  date: RslDate
+  payments: [Payment]
+  label: String
+  type: PaymentdueType
+  creditCard: CreditCard
+}
+
+type Payment {
+  id: Int
+  guiid: Int
+  amount: Amount
+  date: RslDate
+  paymentModeLabel: String
+  voucherCode: String
+}
+
+type CreditCard {
+  guiid: Int
+  maskedPan: String
+  cardholderName: String
+}
+
+type Discount {
+  label: String
+  specificLabel: String
+  quantity: Int
+  price: Amount
+  voucherCode: String
+  documentLabel: String
+  discountCode: String
+  fidelityPoints: Int
+}
+
+type Campaign {
+  code: String
+  label: String
+  startDate: RslDate
+  endDate: RslDate
+}
+
+type RoomInfos {
+  commercialRoomTypeCode: String
+  nbRooms: Int
+  commercialRoomTypeLabel: String
+}
+
+type ProductByCategory {
+  categoryCode: String
+  categoryLabel: String
+  products: [Product]
+}
+
+type Product {
+  id: Int!
+  code: String!
+  label: String
+  webLabel: String
+  originalLabel: String
+  mandatory: Boolean
+  otherCode: String
+  otherLabel: String
+  price: Amount
+  priceWithoutDiscounts: Amount
+  quantity: Int @deprecated(reason: "Use 'quantityMax'.")
+  quantityMax: Int
+  stock: Int
+  description: String
+  isPackage: Boolean
+  isBase: Boolean
+  imagePath: String
+  cmsCriterias: [CriteriaValue]
+  productCriterias: [CriteriaValue]
+  subProducts: [Product]
+  linkedToMap: Boolean
+  ageFrom: Int
+  ageTo: Int
+  distributionType: ProductDistributionType
+  categoryCode: String
+  categoryLabel: String
+  occupantApplication: ProductOccupantApplication
+  forCart: Boolean
+  isLongStay: Boolean
+}
+
+type Proposal {
+  """
+   Clé de proposition
+
+  ---
+
+  ## test
+  ### test2
+  """
+  proposalKey: String
+  propertyId: Int
+  startDate: Date
+  endDate: Date
+  nbDays: Int
+  product: Option @deprecated(reason: "Use 'productOption'.")
+  productOption: ProductOption
+  priceWithoutDiscount: Amount
+  roomFeaturesValues: [CriteriaValue]
+  stock: String
+  imagePath: String
+  price: Amount
+  baseProductPrice: Amount
+  discountInfo: String
+  distribution: Distribution
+  isCounterProposal: Boolean
+  isAlternativeProposal: Boolean
+  lineItems: [Lineitem]
+  isMonthPrice: Boolean
+}
+
+type ProductOption {
+  code: String
+  label: String
+}
+
+type ProposalByProperty {
+  property: Property
+  proposals: [Proposal!]!
+}
+
+type PaymentMethod {
+  automaticPaymentCode: String
+  virtualPaymentCode: String
+  paymentMethod: [Option] @deprecated(reason: "Use 'paymentMethodOption'.")
+  automaticPaymentMethod: [Option]
+    @deprecated(reason: "Use 'automaticPaymentMethodOption'.")
+  paymentMethodOption: [PaymentMethodOption]
+  automaticPaymentMethodOption: [PaymentMethodOption]
+}
+
+type PaymentMethodOption {
+  code: String
+  label: String
+}
+
+type PaymentPlan {
+  code: String
+  label: String
+  isDefault: Boolean
+  cmsCriterias: [CriteriaValue]
+  occupantPaymentDues: [PaymentDue]
+  partnerPaymentDues: [PaymentDue]
+  paymentMethod: PaymentMethod
+  cartItemID: Int
+}
+
+input RoomFeatureValue {
+  code: String!
+  value: String!
+  mandatory: Boolean
+}
+
+input Criterias {
+  nbDays: Int
+  nbAdults: Int!
+  nbBabies: Int
+  nbChildren1: Int
+  nbChildren2: Int
+  childrenBirthdate: [Date]
+  propertyIds: [Int]
+  roomCategories: [String]
+  campaignCode: String
+  startDate: Date
+  endDate: Date
+  roomType: String
+  roomFeatureValues: [RoomFeatureValue]
+  privilegeCardID: Int
+  partnerPrivilegeCardID: Int
+  maxResults: Int
+  discountCode: String
+  baseProductCode: String
+  maxNbRooms: Int
+  noCounterProposal: Boolean
+  sortString: String
+}
+
+"""
+ LANG_gql_WeeklyCriterias
+LANG_gql_WeeklyCriterias_2
+"""
+input WeeklyCriterias {
+  propertyId: Int!
+  nbAdults: Int!
+  nbBabies: Int
+  nbChildren1: Int
+  nbChildren2: Int
+  childrenBirthDates: [Date]
+  startDate: Date
+  endDate: Date
+  month: Int
+  year: Int
+  # LANG_gql_division
+  division: String
+  periodCode: String
+  baseProductCode: String
+  ignoreDayConstraints: Boolean
+  roomTypeCategoryCodes: [String]
+  maxRooms: Int
+  # LANG_gql_useCachedProposalsStd
+  useCachedProposalsStd: Boolean
+}
+
+input SaveCartInput {
+  # LANG_gql_passNewAmountLowerThanPrevious
+  passNewAmountLowerThanPrevious: Boolean
+  fastCheckinCheckout: Boolean
+  cartItemID: Int
+}
+
+input AccountInput {
+  # LANG_gql_userName
+  userName: String
+  # LANG_gql_password
+  password: String
+  # LANG_gql_password2
+  password2: String
+  # LANG_gql_facebookID
+  facebookID: String
+}
+
+input CustomerAddressInput {
+  # LANG_gql_streetName
+  streetName: String
+  # LANG_gql_postalLocality
+  postalLocality: String
+  # LANG_gql_addressComplementary1
+  addressComplementary1: String
+  # LANG_gql_addressComplementary2
+  addressComplementary2: String
+  # LANG_gql_zipCode
+  zipCode: String
+  # LANG_gql_city
+  city: String
+  # LANG_gql_country
+  country: String
+  # LANG_gql_phone1
+  phone1: String
+  # LANG_gql_phone2
+  phone2: String
+  # LANG_gql_fax
+  fax: String
+  # LANG_gql_mail
+  mail: String!
+}
+
+input CriteriaValueInput {
+  code: String!
+  value: String
+  fileName: String
+}
+
+type Criteria {
+  # LANG_gql_Criteria_code
+  code: String!
+  # LANG_gql_Criteria_label
+  label: String
+  # LANG_gql_Criteria_isChoice
+  isChoice: Boolean
+  # LANG_gql_Criteria_isFree
+  isFree: Boolean
+  # LANG_gql_Criteria_isFile
+  isFile: Boolean
+  # LANG_gql_Criteria_choices
+  choices: [Option] @deprecated(reason: "Use 'choiceList'.")
+  choiceList: [CriteriaChoice]
+  # LANG_gql_Criteria_obligatory
+  mandatory: Boolean
+}
+
+type CMSCriteria {
+  code: String!
+  classId: Int!
+  label: String
+  inputType: InputType
+  cmsCriteriaValues: [CmsCriteriaValue]
+}
+
+type CriteriaChoice {
+  code: String
+  label: String
+}
+
+type CustomerDepositAccount {
+  # LANG_gql_CustomerAccount_id
+  id: Int
+  # LANG_gql_CustomerAccount_name
+  name: String
+  # LANG_gql_CustomerAccount_etabID
+  propertyId: Int!
+  # LANG_gql_CustomerAccount_type
+  type: Int
+  # LANG_gql_CustomerAccount_balance
+  balance: Amount
+}
+
+type File {
+  # LANG_gql_File_type
+  type: String
+  # LANG_gql_File_date
+  date: RslDateTime
+  # LANG_gql_File_sent_by_Email
+  sentByEmail: Boolean
+  # LANG_gql_File_sent_by_Print
+  sentByPrint: Boolean
+  # LANG_gql_File_url
+  url: String
+}
+
+input PspUrl {
+  acceptUrl: String
+  declineUrl: String
+  cancelUrl: String
+  exceptionUrl: String
+}
+
+input PrimaryOccupantInput {
+  civility: String
+  # LANG_gql_firstName
+  firstName: String!
+  # LANG_gql_lastName
+  lastName: String!
+  # LANG_gql_birthDate
+  birthDate: Date
+  # LANG_gql_languageCode
+  languageCode: String
+  # LANG_gql_address
+  address: CustomerAddressInput
+  bookingId: Int
+  cartItemID: Int
+}
+
+type RoomType {
+  code: String!
+  label: String
+  webLabel: String
+  cmsCriterias: [CriteriaValue]
+  roomFeatures: [CriteriaValue]
+  description: String
+  paxMax: Int
+  quantity: Int
+  categoryCode: String
+  categoryLabel: String
+  pax: Int
+  propertyId: Int
+}
+
+type Distribution {
+  roomTypes: [RoomType]
+  roomNumbers: [String]
+}
+
+type Calfwidth {
+  id: Int
+  value: String
+}
+
+type Footwidth {
+  id: Int
+  value: String
+}
+
+type Headsize {
+  id: Int
+  value: String
+}
+
+type Heights {
+  id: Int
+  value: String
+}
+
+type Measurements {
+  calfwidths: [Calfwidth]
+  footwidths: [Footwidth]
+  headsizes: [Headsize]
+  heights: [Heights]
+  shoesizes: [Shoesize]
+  unit: String
+  weights: [Weight]
+}
+
+type MeasurementsOutput {
+  measurements: Measurements
+}
+
+type Shoesize {
+  id: Int
+  value: String
+}
+
+type Weight {
+  id: Int
+  value: String
+}
+
+type PspUrlOutput {
+  acceptUrl: String
+  declineUrl: String
+  cancelUrl: String
+  exceptionUrl: String
+}
+
+type GatewayDescription {
+  endPoint: String
+  publicKey: String
+  isTest: Boolean
+  url: PspUrlOutput
+}
+
+type LyraFormTokenOutput {
+  gatewayDescription: GatewayDescription
+  orderId: String
+  formToken: String
+}
+
+type FidelityRule {
+  label: String
+  fidelityPoints: Int
+}
+
+type FidelityLog {
+  numResa: Int
+  fidelityPoints: Int
+  date: RslDateTime
+  label: String
+}
+
+type ProductCMSCriteria {
+  cmsCriteria: CMSCriteria
+}
+
+type CmsCriteriaValue {
+  code: String
+  label: String
+  color: String
+}
+
+enum ProductDistributionType {
+  GLOBAL
+  ROOM
+  OCCUPANT
+  CAMPAIGN
+}
+
+enum BookingStatus {
+  OPTION
+  GUARANTEED
+  ESTIMATE
+}
+
+enum PaymentdueType {
+  ARRHES
+  SOLDE
+  MONTHLY
+  CASHLESS
+}
+
+enum SkisetMeasureType {
+  WEIGHT
+  HEIGHT
+  SHOESIZE
+}
+
+enum InputType {
+  TEXT
+  CHECKBOX
+  ENUM
+}
+
+type FerryPortsOutput {
+  ports: [Port]
+}
+
+type FerryCarsOutput {
+  cars: [Car]
+}
+type Car {
+  make: String
+  model: String
+  vehicleCategoryCode: String
+}
+
+type FerryVehicleCategoriesOutput {
+  vehicleCategories: [VehicleCategory]
+}
+
+type FerryAddonCategoriesOutput {
+  addonCategories: [AddonCategory]
+}
+
+type FerryTrailerCategoriesOutput {
+  trailerCategories: [TrailerCategory]
+}
+
+type FerryVehicleFuelsOutput {
+  vehicleFuels: [FerryVehicleFuel]
+}
+
+type FerryVehicleFuel {
+  code: String!
+  label: String
+}
+
+type VehicleCategory {
+  code: String!
+  label: String
+  isCar: Boolean
+}
+
+type AddonCategory {
+  code: String!
+  label: String
+  size: String
+  type: String
+}
+
+type TrailerCategory {
+  code: String!
+  label: String
+}
+
+type FerryNationalitiesOutput {
+  nationalities: [Nationality]
+}
+
+type Nationality {
+  code: String
+  label: String
+}
+
+type FerryCivilitiesOutput {
+  civilities: [Civility]
+}
+
+input CancelFerryBookingInput {
+  lineItemGuiid: Int!
+  cartItemID: Int
+}
+
+type CancelFerryBookingOutput {
+  cart: Cart
+}
+
+input UpdateFerryBookingInput {
+  resFerryId: Int @deprecated(reason: "Use 'lineItemGuiid'.")
+  lineItemGuiid: Int
+  cartItemID: Int
+}
+
+input LyraPaymentValidationInput {
+  orderId: String
+  clientAnswer: String!
+  hashKey: String!
+}
+
+enum LyraPaymentValidatationStatus {
+  SUCCESS
+  FAILURE
+}
+
+type AssignRoomOutput {
+  cart: Cart
+}
+
+type UnassignRoomOutput {
+  cart: Cart
+}
+
+type LyraPaymentValidationOutput {
+  cart: Cart
+  lyraStatus: LyraPaymentValidatationStatus
+}
+
+type UpdateFerryBookingOutput {
+  ferryBooking: FerryBooking
+}
+
+type PassengerType {
+  code: String!
+  label: String
+}
+
+input SaveFerryBookingInput {
+  occupantGuiid: Int
+  productCode: String
+}
+
+type SaveFerryBookingOutput {
+  cart: Cart
+}
+
+input UpdateFerryTravelersInformationInput {
+  passengers: [PassengerInfo]
+  vehicle: VehicleInfo
+  trailer: TrailerInfo
+  contact: ContactInfo
+}
+
+input ContactInfo {
+  email: String
+  phone: String
+}
+
+input VehicleInfo {
+  licensePlate: String
+  fuel: String
+}
+input TrailerInfo {
+  licensePlate: String
+}
+
+input PassengerInfo {
+  index: Int
+  type: String
+  lastName: String
+  firstName: String
+  birthDate: Date
+  civility: String
+  nationality: String
+  passport: String
+  passportExpiry: Date
+}
+
+type PendingFerryBookingOutput {
+  ferryBooking: FerryBooking
+}
+
+type ResetPendingFerryBookingOutput {
+  ferryBooking: FerryBooking
+}
+
+type UpdateFerryTravelersInformationOutput {
+  ferryBooking: FerryBooking
+}
+
+type UpdateFerryAccommodationsOutput {
+  ferryBooking: FerryBooking
+}
+
+input UpdateFerryAccommodationsInput {
+  outwardAccommodations: [AccommodationInput]
+  returnAccommodations: [AccommodationInput]
+}
+
+input AccommodationInput {
+  code: String
+  quantity: Int
+}
+
+type FerryAvailableAccommodationsOutput {
+  outwardAccommodations: [Accommodation]
+  returnAccommodations: [Accommodation]
+}
+
+type FerryProductsOutput {
+  ferryProducts: [FerryProduct]
+}
+
+type FerryProduct {
+  code: String
+  label: String
+}
+
+input ChooseFerryProposalInput {
+  proposalId: Int
+}
+
+input ChooseRoundTripProposalsInput {
+  outwardProposalId: Int
+  returnProposalId: Int
+}
+
+type ChooseFerryProposalOutput {
+  ferryBooking: FerryBooking
+}
+
+type ChooseRoundTripProposalsOutput {
+  ferryBooking: FerryBooking
+}
+
+type FerryBooking {
+  resFerryId: Int
+  bookingRef: String
+  status: String
+  sendStatus: String
+  supplier: Supplier!
+  passengers: [Passenger]!
+  outwardTrip: Trip!
+  returnTrip: Trip
+  contact: Contact
+  vehicle: Vehicle @deprecated(reason: "Vehicle moved in Trip")
+  totalAmount: Amount!
+  passportMandatory: Boolean
+}
+
+type Contact {
+  email: String
+  phone: String
+}
+
+type Accommodation {
+  code: String!
+  label: String
+  occupancy: Int
+  quantity: Int
+  unitPrice: Amount
+  totalAmount: Amount
+}
+
+type Passenger {
+  index: Int
+  passengerTypeCode: String
+  lastName: String!
+  firstName: String
+  birthDate: Date!
+  civility: Civility
+  nationality: String
+  passport: String
+  passportExpiry: Date
+  availablePassengerTypes: [PassengerType]
+}
+
+type Vehicle {
+  vehicleType: String!
+  mark: String
+  model: String
+  height: Float
+  length: Float
+  additionalHeight: Float
+  additionalLength: Float
+  registration: String
+}
+
+type Trailer {
+  trailerType: String!
+  mark: String
+  model: String
+  height: Float
+  length: Float
+  registration: String
+  amount: Amount
+}
+
+input FerryProposalsInput {
+  criterias: FerryBookingCriterias
+  cartItemID: Int
+}
+
+input FerryBookingCriterias {
+  nbAdults: Int
+  nbChildren: Int
+  vehicle: CriteriasVehicle
+  trailer: CriteriasTrailer
+  port: CriteriasPort
+  outwardTrip: CriteriasTrip
+  returnTrip: CriteriasTrip
+  flexibleDates: Boolean
+  strictPorts: Boolean
+}
+
+input CriteriasTrip {
+  departureDate: FerryDate
+  departureTime: FerryTime
+}
+
+input CriteriasPort {
+  departurePortName: String!
+  arrivalPortName: String!
+}
+
+input CriteriasVehicle {
+  vehicleCategory: String!
+  mark: String
+  model: String
+  height: Float
+  length: Float
+  additionalHeight: Float
+  additionalLength: Float
+}
+
+input CriteriasTrailer {
+  trailerCategory: String!
+  mark: String
+  model: String
+  height: Float
+  length: Float
+}
+
+type FerryProposalsOutput {
+  proposals: [FerryProposal]
+  warningList: [String]
+  canChooseRoundTripProposals: Boolean
+}
+
+type FerryProposal {
+  id: Int!
+  supplier: Supplier!
+  outwardTrip: Trip!
+  returnTrip: Trip
+  totalAmount: Amount!
+  isFlexibleFare: Boolean
+  tariff: FerryProposalTariff
+}
+
+type FerryProposalTariff {
+  tariffBand: String
+  tariffType: String
+}
+
+type Trip {
+  departurePort: Port!
+  arrivalPort: Port!
+  departureDate: FerryDate!
+  departureTime: FerryTime!
+  arrivalDate: FerryDate!
+  arrivalTime: FerryTime!
+  duration: FerryTime!
+  shipName: String
+  coreTrip: CoreTrip
+  vehicle: Vehicle
+  trailer: Trailer
+  accommodations: [Accommodation]
+  routeAmount: Amount @deprecated(reason: "Moved in CoreTrip")
+  accommodationsAmount: Amount
+}
+
+type CoreTrip {
+  amount: Amount
+}
+
+type Supplier {
+  code: String
+  label: String
+}
+
+type Port {
+  portName: String
+  label: String
+}
+
+type Option {
+  code: String
+  label: String
+  default: Boolean
+}
+
+input PaymentPlansInput {
+  cartItemID: Int
+}
+
+input PaymentLinkAuthenticationInput {
+  username: String!
+  paymentLinkToken: String!
+}
+
+input PaymentGatewayFromPaymentLinkInput {
+  instalmentId: Int
+  paymentAmount: BigDecimal
+  ccardType: Int
+  url: PspUrl
+}
+
+input ProductProposalsInput {
+  propertyId: Int
+  nbDays: Int
+  selectedDate: Date!
+  cmsCriteriaValue: CmsCriteriaValueInput
+}
+
+input CmsCriteriaValueInput {
+  code: String!
+  value: String!
+}
+
+type PaymentGatewayFromPaymentLinkOutput {
+  gateway: String
+}
+
+enum OccupantTypeEnum {
+  IS_CHILDREN_1
+  IS_CHILDREN_2
+  IS_ADULT
+}
+
+enum ProductOccupantApplication {
+  HIMSELF
+  EVERYBODY
+  EVERYBODY_IN_ROOM
+}
+
+scalar Date
+scalar RslDate
+scalar RslDateTime
+scalar BigDecimal
+scalar LocalTime
+scalar FerryDate
+scalar FerryTime

@@ -1,0 +1,5 @@
+query getMyLogin($session: Session!, $input: MyLoginInput){
+    getMyLogin(session: $session, input: $input){
+        login
+    }
+}

@@ -1,0 +1,32 @@
+query getFerryAvailableAccommodations($session: Session!){
+    getFerryAvailableAccommodations(session: $session){
+        outwardAccommodations{
+            code
+            label
+            occupancy
+            quantity
+            unitPrice{
+                amount
+                currencyCode
+            }
+            totalAmount{
+                amount
+                currencyCode
+            }
+        }
+        returnAccommodations{
+            code
+            label
+            occupancy
+            quantity
+            unitPrice{
+                amount
+                currencyCode
+            }
+            totalAmount{
+                amount
+                currencyCode
+            }
+        }
+    }
+}

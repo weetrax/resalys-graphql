@@ -1,0 +1,33 @@
+# Source files
+src/
+gql/
+*.graphql
+*.graphql.bin
+
+# Tests
+tests/
+test/
+*.spec.ts
+*.test.ts
+
+# Config files
+tsconfig.json
+playwright.config.ts
+.env
+.env.*
+
+# Development
+node_modules/
+.git/
+.github/
+.vscode/
+.idea/
+
+# Documentation
+*.md
+!README.md
+
+# Divers
+coverage/
+.DS_Store
+*.log

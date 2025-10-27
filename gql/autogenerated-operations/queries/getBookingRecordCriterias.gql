@@ -1,0 +1,16 @@
+query getBookingRecordCriterias($session: Session!){
+    getBookingRecordCriterias(session: $session){
+        criterias{
+            code
+            label
+            isChoice
+            isFree
+            isFile
+            choiceList{
+                code
+                label
+            }
+            mandatory
+        }
+    }
+}

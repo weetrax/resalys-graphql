@@ -1,0 +1,10 @@
+query getFidelityLogs($session: Session!){
+    getFidelityLogs(session: $session){
+        fidelityLogs{
+            numResa
+            fidelityPoints
+            date
+            label
+        }
+    }
+}

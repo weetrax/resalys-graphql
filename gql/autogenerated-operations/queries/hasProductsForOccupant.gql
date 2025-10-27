@@ -1,0 +1,5 @@
+query hasProductsForOccupant($session: Session!, $input: HasProductsForOccupantInput){
+    hasProductsForOccupant(session: $session, input: $input){
+        hasProductsForOccupant
+    }
+}

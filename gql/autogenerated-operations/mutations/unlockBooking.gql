@@ -1,0 +1,5 @@
+mutation unlockBooking($session: Session!, $input: UnlockBookingInput!){
+    unlockBooking(session: $session, input: $input){
+        bookingUnlocked
+    }
+}

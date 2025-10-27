@@ -1,0 +1,14 @@
+query getCustomerDepositAccounts($session: Session!){
+    getCustomerDepositAccounts(session: $session){
+        customerDepositAccounts{
+            id
+            name
+            propertyId
+            type
+            balance{
+                amount
+                currencyCode
+            }
+        }
+    }
+}

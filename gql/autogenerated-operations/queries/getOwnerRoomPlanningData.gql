@@ -1,0 +1,14 @@
+query getOwnerRoomPlanningData($session: Session!, $input: OwnerRoomPlanningDataInput!){
+    getOwnerRoomPlanningData(session: $session, input: $input){
+        calendarPeriods{
+            id
+            label
+            color
+            textColor
+            listPeriod{
+                startDate
+                endDate
+            }
+        }
+    }
+}

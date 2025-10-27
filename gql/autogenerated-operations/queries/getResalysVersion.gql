@@ -1,0 +1,5 @@
+query getResalysVersion($session: Session!){
+    getResalysVersion(session: $session){
+        version
+    }
+}

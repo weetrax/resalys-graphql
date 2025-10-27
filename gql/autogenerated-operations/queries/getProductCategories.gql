@@ -1,0 +1,9 @@
+query getProductCategories($session: Session!){
+    getProductCategories(session: $session){
+        productCategories{
+            code
+            label
+            order
+        }
+    }
+}

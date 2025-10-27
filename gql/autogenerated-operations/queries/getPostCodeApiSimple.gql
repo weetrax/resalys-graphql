@@ -1,0 +1,5 @@
+query getPostCodeApiSimple($session: Session!, $input: PostCodeApiSimpleInput!){
+    getPostCodeApiSimple(session: $session, input: $input){
+        code
+    }
+}

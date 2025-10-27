@@ -1,0 +1,5 @@
+mutation redirectPaymentGatewayFromPaymentLink($paymentLinkAuthenticationInput: PaymentLinkAuthenticationInput!, $input: PaymentGatewayFromPaymentLinkInput){
+    redirectPaymentGatewayFromPaymentLink(paymentLinkAuthenticationInput: $paymentLinkAuthenticationInput, input: $input){
+        gateway
+    }
+}

@@ -1,0 +1,5 @@
+query checkSessionActivated($session: Session!){
+    checkSessionActivated(session: $session){
+        activated
+    }
+}

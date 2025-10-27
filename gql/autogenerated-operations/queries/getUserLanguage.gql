@@ -1,0 +1,5 @@
+query getUserLanguage($session: Session!){
+    getUserLanguage(session: $session){
+        languageCode
+    }
+}

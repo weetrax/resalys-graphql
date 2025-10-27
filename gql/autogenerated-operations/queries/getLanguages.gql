@@ -1,0 +1,12 @@
+query getLanguages($session: Session!){
+    getLanguages(session: $session){
+        languages{
+            code
+            label
+            languageVars{
+                code
+                value
+            }
+        }
+    }
+}

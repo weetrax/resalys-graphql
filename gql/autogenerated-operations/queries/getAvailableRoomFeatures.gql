@@ -1,0 +1,13 @@
+query getAvailableRoomFeatures($session: Session!, $input: AvailableRoomFeaturesInput){
+    getAvailableRoomFeatures(session: $session, input: $input){
+        roomFeatures{
+            categoryLabel
+            code
+            label
+            options{
+                code
+                label
+            }
+        }
+    }
+}

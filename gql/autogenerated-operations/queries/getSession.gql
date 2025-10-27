@@ -1,0 +1,5 @@
+query getSession($input: SessionInput){
+    getSession(input: $input){
+        name
+    }
+}

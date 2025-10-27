@@ -1,0 +1,8 @@
+query getRelationships($session: Session!){
+    getRelationships(session: $session){
+        relationships{
+            id
+            label
+        }
+    }
+}

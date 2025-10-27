@@ -1,0 +1,8 @@
+mutation uploadFiles($session: Session!, $input: [UploadFileInput]!){
+    uploadFiles(session: $session, input: $input){
+        uploadData{
+            uploadUrl
+            fileId
+        }
+    }
+}

@@ -1,0 +1,5 @@
+mutation redirectPaymentGatewayForAccount($session: Session!, $input: PaymentGatewayForAccountInput!){
+    redirectPaymentGatewayForAccount(session: $session, input: $input){
+        gateway
+    }
+}

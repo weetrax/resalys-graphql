@@ -1,0 +1,8 @@
+query getPrivilegeCardTypes($session: Session!){
+    getPrivilegeCardTypes(session: $session){
+        privilegeCardTypeList{
+            code
+            label
+        }
+    }
+}

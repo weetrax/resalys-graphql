@@ -1,0 +1,8 @@
+query getResalysErrorList($session: Session!){
+    getResalysErrorList(session: $session){
+        errorList{
+            code
+            message
+        }
+    }
+}

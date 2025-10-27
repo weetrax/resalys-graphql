@@ -1,0 +1,8 @@
+query getFerryNationalities($session: Session!){
+    getFerryNationalities(session: $session){
+        nationalities{
+            code
+            label
+        }
+    }
+}

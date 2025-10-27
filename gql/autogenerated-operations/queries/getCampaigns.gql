@@ -1,0 +1,10 @@
+query getCampaigns($session: Session!){
+    getCampaigns(session: $session){
+        campaignList{
+            code
+            label
+            startDate
+            endDate
+        }
+    }
+}

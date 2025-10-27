@@ -1,0 +1,5 @@
+mutation redirectPaymentGatewayForCart($session: Session!, $input: PaymentGatewayForCartInput!){
+    redirectPaymentGatewayForCart(session: $session, input: $input){
+        gateway
+    }
+}

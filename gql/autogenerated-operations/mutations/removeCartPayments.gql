@@ -1,0 +1,5 @@
+mutation removeCartPayments($session: Session!){
+    removeCartPayments(session: $session){
+        removed
+    }
+}

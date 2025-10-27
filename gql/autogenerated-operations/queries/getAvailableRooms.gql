@@ -1,0 +1,12 @@
+query getAvailableRooms($session: Session!, $input: AvailableRoomsInput!){
+    getAvailableRooms(session: $session, input: $input){
+        availableRooms{
+            roomNumber
+            label
+            roomTypeCode
+            available
+            startDate
+            endDate
+        }
+    }
+}

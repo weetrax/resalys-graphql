@@ -1,0 +1,16 @@
+query getCustomerCriterias($session: Session!, $input: CustomerCriteriasInput){
+    getCustomerCriterias(session: $session, input: $input){
+        criterias{
+            code
+            label
+            isChoice
+            isFree
+            isFile
+            choiceList{
+                code
+                label
+            }
+            mandatory
+        }
+    }
+}

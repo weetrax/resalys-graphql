@@ -1,0 +1,11 @@
+query getBookingDocuments($session: Session!, $input: BookingDocumentsInput!){
+    getBookingDocuments(session: $session, input: $input){
+        documents{
+            type
+            date
+            sentByEmail
+            sentByPrint
+            url
+        }
+    }
+}

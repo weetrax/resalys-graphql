@@ -1,0 +1,10 @@
+query getFerryAddonCategories($session: Session!){
+    getFerryAddonCategories(session: $session){
+        addonCategories{
+            code
+            label
+            size
+            type
+        }
+    }
+}

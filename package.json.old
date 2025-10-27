@@ -1,0 +1,28 @@
+{
+  "name": "rsl-gql",
+  "version": "1.0.0",
+  "description": "RSL GraphQL",
+  "scripts": {
+    "test": "npx playwright test",
+    "download-schema": "curl -o ./schema.graphql.bin http://playwright.nonreg.rsl.dev.sequoiasoft.com/rsl/schema_graphql?base_id=quality_graphql_v10_6_a_resalys && mv ./schema.graphql.bin ./src/schema.graphql",
+    "generate": "playwright-graphql --schema ./src/schema.graphql",
+    "tentative": "playwright-graphql --schema ./src/schema.graphql",
+    "build": "playwright-graphql --schema ./src/schema.graphql"
+  },
+  "dependencies": {
+    "@graphql-codegen/cli": "^5.0.7",
+    "@graphql-codegen/client-preset": "^4.7.0",
+    "@graphql-codegen/typescript": "^4.1.6",
+    "@graphql-codegen/typescript-document-nodes": "^4.0.16",
+    "@graphql-codegen/typescript-graphql-request": "^6.3.0",
+    "@graphql-codegen/typescript-operations": "^4.6.1",
+    "@playwright/test": "^1.56.1",
+    "@types/node": "^22.18.12",
+    "dotenv": "^16.6.1",
+    "graphql": "^16.11.0",
+    "playwright-graphql": "^1.2.3",
+    "react": "^19.2.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
