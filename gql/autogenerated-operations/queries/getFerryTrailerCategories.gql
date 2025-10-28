@@ -1,8 +1,0 @@
-query getFerryTrailerCategories($session: Session!){
-    getFerryTrailerCategories(session: $session){
-        trailerCategories{
-            code
-            label
-        }
-    }
-}

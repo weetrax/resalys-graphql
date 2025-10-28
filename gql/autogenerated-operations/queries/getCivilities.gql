@@ -1,8 +1,0 @@
-query getCivilities($session: Session!){
-    getCivilities(session: $session){
-        civilitiyList{
-            code
-            label
-        }
-    }
-}

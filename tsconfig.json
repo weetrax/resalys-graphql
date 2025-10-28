@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES2019", // version JS de sortie
+    "module": "ESNext", // ou "CommonJS" selon ton usage
+    "declaration": true, // génère les .d.ts
+    "outDir": "dist", // dossier de sortie
+    "rootDir": "output", // dossier source
+    "strict": true,
+    "moduleResolution": "node", // ⚠️ surtout PAS "nodenext" sauf si tu es full ESM
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  },
+  "include": ["output"]
+}

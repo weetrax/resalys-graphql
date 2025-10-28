@@ -1,5 +1,0 @@
-query checkModuleFacebookActivated($session: Session!){
-    checkModuleFacebookActivated(session: $session){
-        activated
-    }
-}

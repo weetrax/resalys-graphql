@@ -1,5 +1,0 @@
-mutation redirectPaymentGatewayForAmount($session: Session!, $input: PaymentGatewayForAmountInput!){
-    redirectPaymentGatewayForAmount(session: $session, input: $input){
-        gateway
-    }
-}

@@ -1,9 +1,0 @@
-query getFerryCars($session: Session!){
-    getFerryCars(session: $session){
-        cars{
-            make
-            model
-            vehicleCategoryCode
-        }
-    }
-}

@@ -1,5 +1,0 @@
-query getPostCodeApiDetail($session: Session!, $input: PostCodeApiDetailInput!){
-    getPostCodeApiDetail(session: $session, input: $input){
-        code
-    }
-}

@@ -1,5 +1,0 @@
-mutation removeCustomerAccount($session: Session!){
-    removeCustomerAccount(session: $session){
-        removed
-    }
-}

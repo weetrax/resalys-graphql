@@ -1,5 +1,0 @@
-query requestBrochure($session: Session!, $input: BrochureInput){
-    requestBrochure(session: $session, input: $input){
-        requested
-    }
-}

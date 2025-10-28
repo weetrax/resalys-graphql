@@ -1,8 +1,0 @@
-query getFerryProducts($session: Session!){
-    getFerryProducts(session: $session){
-        ferryProducts{
-            code
-            label
-        }
-    }
-}

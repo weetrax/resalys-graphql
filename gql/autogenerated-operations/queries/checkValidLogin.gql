@@ -1,5 +1,0 @@
-query checkValidLogin($session: Session!, $input: ValidLoginInput!){
-    checkValidLogin(session: $session, input: $input){
-        valid
-    }
-}

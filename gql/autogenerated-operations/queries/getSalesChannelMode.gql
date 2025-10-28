@@ -1,5 +1,0 @@
-query getSalesChannelMode($session: Session!){
-    getSalesChannelMode(session: $session){
-        mode
-    }
-}

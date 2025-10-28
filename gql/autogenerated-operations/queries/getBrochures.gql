@@ -1,8 +1,0 @@
-query getBrochures($session: Session!){
-    getBrochures(session: $session){
-        brochureList{
-            code
-            label
-        }
-    }
-}

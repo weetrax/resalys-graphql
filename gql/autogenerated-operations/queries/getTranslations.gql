@@ -1,8 +1,0 @@
-query getTranslations($session: Session!, $input: TranslationsInput){
-    getTranslations(session: $session, input: $input){
-        translations{
-            code
-            value
-        }
-    }
-}

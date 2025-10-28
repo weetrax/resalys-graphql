@@ -1,0 +1,18 @@
+schema: "./src/schema.graphql" # Chemin vers le schéma GraphQL généré en récupérant le shcéma binaire de l'end point et en le sauvegardant dans un fichier .graphql
+documents: "./gql/**/*.gql" # Chemin vers les fichiers de requêtes GraphQL
+generates:
+  "./output/graphql.ts": # Fichier où les types des opérations (requêtes, mutations) seront générés
+    plugins:
+      - "typescript" # Plugin pour générer les opérations (Query & Mutation) en TypeScript
+  "./output/operations/index.ts":
+    plugins:
+      - "typescript-document-nodes"
+    config:
+      documentNodeImport: "graphql-tag#gql"
+    # 👇 Génération automatique d'un index global
+  "./output/index.ts":
+    plugins:
+      - add:
+          content: |
+            export * from './graphql';
+            export * from './operations';

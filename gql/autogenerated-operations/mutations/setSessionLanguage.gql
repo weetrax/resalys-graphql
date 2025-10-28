@@ -1,5 +1,0 @@
-mutation setSessionLanguage($session: Session!, $input: SessionLanguageInput!){
-    setSessionLanguage(session: $session, input: $input){
-        languageCode
-    }
-}

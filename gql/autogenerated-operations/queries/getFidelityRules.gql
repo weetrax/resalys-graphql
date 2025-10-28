@@ -1,8 +1,0 @@
-query getFidelityRules($session: Session!){
-    getFidelityRules(session: $session){
-        fidelityRules{
-            label
-            fidelityPoints
-        }
-    }
-}

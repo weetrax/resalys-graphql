@@ -1,8 +1,0 @@
-query getFerryVehicleFuels($session: Session!){
-    getFerryVehicleFuels(session: $session){
-        vehicleFuels{
-            code
-            label
-        }
-    }
-}

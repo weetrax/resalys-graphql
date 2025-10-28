@@ -1,8 +1,0 @@
-query getFerryCivilities($session: Session!){
-    getFerryCivilities(session: $session){
-        civilities{
-            code
-            label
-        }
-    }
-}

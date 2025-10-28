@@ -1,5 +1,0 @@
-mutation expireSession($session: Session!){
-    expireSession(session: $session){
-        isExpired
-    }
-}

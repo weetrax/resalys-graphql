@@ -1,5 +1,0 @@
-query getCustomerLoyaltyPoints($session: Session!){
-    getCustomerLoyaltyPoints(session: $session){
-        points
-    }
-}
