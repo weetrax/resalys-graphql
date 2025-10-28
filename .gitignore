@@ -7,6 +7,8 @@ yarn-error.log*
 # Production builds
 build/
 out/
+output/
+gql/
 
 # Environment variables
 .env
